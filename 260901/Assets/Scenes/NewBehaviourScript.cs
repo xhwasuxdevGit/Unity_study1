@@ -1,26 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-   
 
-    public float JumpForce;
-    public Rigidbody _rigidbody;
-    
-  
-    
+    private void Awake()
+    {
+        Debug.Log("Awake 호출");
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log("OnEnable 호출");
+    }
+
+    private void Start()
+    {
+        Debug.Log("Start 호출");
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-        }
-        
-        
-        
-       
+        //Debug.Log("Update 호출");
+    }
 
+    private void OnDisable()
+    {
+        Debug.Log("OnDisable 호출");
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("OnDestroy 호출");
     }
 }
