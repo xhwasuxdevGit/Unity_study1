@@ -4,15 +4,43 @@ using UnityEngine;
 
 public class LifeCycleProbe : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        Debug.Log("LifeCycleProbe: Awake");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        Debug.Log("LifeCycleProbe: OnEnable");
+    }
+
+    private void Start()
+    {
+        Debug.Log("LifeCycleProbe: Start");
+    }
+
+    private void FixedUpdate()
+    {
+        //Debug.Log("LifeCycleProbe: FixedUpdate");
+    }
+
+    private void Update()
+    {
+        //Debug.Log("LifeCycleProbe: Update");
+    }
+
+    private void LateUpdate()
+    {
+        //Debug.Log("LifeCycleProbe: LateUpdate");
+    }
+
+    private void OnDisable()
+    {
+        Debug.Log("LifeCycleProbe OnDisable");
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("LifeCycleProbe: OnDestroy");
     }
 }
