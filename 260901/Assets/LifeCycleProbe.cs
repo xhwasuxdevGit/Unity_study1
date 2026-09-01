@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class LifeCycleProbe : MonoBehaviour
 {
+    private float _elapsed1;
+    private float _elapsed2;
+    
     private void Awake() => LogStep("Awake");
   
     private void OnEnable() => LogStep("OnEnable");
@@ -11,17 +14,22 @@ public class LifeCycleProbe : MonoBehaviour
    
     private void FixedUpdate()
     {
-        //Debug.Log("LifeCycleProbe: FixedUpdate");
+        Debug.Log("LifeCycleProbe: FixedUpdate");
+        _elapsed1 += Time.deltaTime;
+        Debug.Log(_elapsed1);
     }
 
     private void Update()
     {
-        //Debug.Log("LifeCycleProbe: Update");
+        Debug.Log("LifeCycleProbe: Update");
+        
+        _elapsed2 += Time.deltaTime;
+        Debug.Log(_elapsed2);
     }
 
     private void LateUpdate()
     {
-        //Debug.Log("LifeCycleProbe: LateUpdate");
+        Debug.Log("LifeCycleProbe: LateUpdate");
     }
 
     private void OnDisable() => LogStep("OnDisable");
