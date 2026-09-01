@@ -1,24 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class LifeCycleProbe : MonoBehaviour
 {
-    private void Awake()
-    {
-        Debug.Log("LifeCycleProbe: Awake");
-    }
+    private void Awake() => LogStep("Awake");
+  
+    private void OnEnable() => LogStep("OnEnable");
 
-    private void OnEnable()
-    {
-        Debug.Log("LifeCycleProbe: OnEnable");
-    }
-
-    private void Start()
-    {
-        Debug.Log("LifeCycleProbe: Start");
-    }
-
+    private void Start() => LogStep("Start");
+   
     private void FixedUpdate()
     {
         //Debug.Log("LifeCycleProbe: FixedUpdate");
@@ -34,13 +24,12 @@ public class LifeCycleProbe : MonoBehaviour
         //Debug.Log("LifeCycleProbe: LateUpdate");
     }
 
-    private void OnDisable()
+    private void OnDisable() => LogStep("OnDisable");
+    
+    private void OnDestroy() => LogStep("OnDestroy");
+    
+    private void LogStep(string stepName)
     {
-        Debug.Log("LifeCycleProbe OnDisable");
-    }
-
-    private void OnDestroy()
-    {
-        Debug.Log("LifeCycleProbe: OnDestroy");
+        Debug.Log($"LifeCycleProbe: {stepName}");
     }
 }
