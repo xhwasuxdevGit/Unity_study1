@@ -49,6 +49,7 @@ public class ExhibitController : MonoBehaviour
     {
         _selfRenderer = GetComponent<Renderer>();
         Debug.Log($"ExhibitController: 가리키고있는 렌더러는 {_selfRenderer.name}입니다.");
+        
     }
 
     private void InitAngle()
@@ -92,7 +93,7 @@ public class ExhibitController : MonoBehaviour
 
     private void HideSpot()
     {
-        _spotRenderer.enabled = false;
         Debug.Log("ExhibitController: 표식으로 지정한 구조물을 표시하지 않습니다.");
+        _spotRenderer.enabled = false;
     }
 }
