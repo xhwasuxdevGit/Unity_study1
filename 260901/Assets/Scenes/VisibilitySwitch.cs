@@ -6,9 +6,11 @@ public class VisibilitySwitch : MonoBehaviour
 
     [SerializeField] private Renderer _childRenderer;
 
-    [SerializeField] private bool _showSelf = true;
+    //[SerializeField] private bool _showSelf = true;
     [SerializeField] private bool _showChild = true;
     [SerializeField] private bool _showFar = true;
+
+    [field: SerializeField] public bool ShowSelf { get; private set; }
 
     private Renderer _selfRenderer;
     private Renderer _farRenderer;
@@ -28,7 +30,7 @@ public class VisibilitySwitch : MonoBehaviour
 
     private void Start()
     {
-        _selfRenderer.enabled = _showSelf;
+        _selfRenderer.enabled = ShowSelf;
         _childRenderer.enabled = _showChild;
         _farRenderer.enabled = _showFar;
     }
