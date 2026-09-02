@@ -6,19 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneStudy : MonoBehaviour
 {
-   private const string SCENE_PLAY = "Play";
-
-   private void Update()
+   private void Start()
    {
-      ReadSceneKeys();
+      LogActiveScene();
    }
-   
-   private void  ReadSceneKeys()
+
+   private void LogActiveScene()
    {
-      if (Input.GetKeyDown(KeyCode.Return))
-      {
-         Debug.Log($"SceneStudy: {SCENE_PLAY} 씬을 부릅니다.");
-         SceneManager.LoadScene(SCENE_PLAY);
-      }
+      Debug.Log($"SceneStudy: 지금 열린 씬은 {SceneManager.GetActiveScene().name}입니다.");
    }
 }
