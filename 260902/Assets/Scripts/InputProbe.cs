@@ -8,6 +8,9 @@ public class InputProbe : MonoBehaviour
     [SerializeField] private float _amountPerSecond = 3f;
     private const int MOUSE_BUTTON_LEFT = 0;
 
+    private const string AXIS_MOUSE_X = "Mouse X";
+    private const string AXIS_MOUSE_Y = "Mouse Y";
+
     private float _total;
     
     private Renderer _renderer;
@@ -20,7 +23,8 @@ public class InputProbe : MonoBehaviour
     {
         //ReadToggleKey();
         //ReadAxes();
-        ReadMouseButton();
+        //ReadMouseButton();
+        ReadMouseDelta();
     }
     
     private void CacheComponents()
@@ -51,6 +55,13 @@ public class InputProbe : MonoBehaviour
         {
             Debug.Log($"InputProbe: 마우스가 클릭한 좌표는 {Input.mousePosition}입니다.");
         }
+    }
+
+    private void ReadMouseDelta()
+    {
+        float mouseX = Input.GetAxisRaw(AXIS_MOUSE_X);
+        float mouseY = Input.GetAxisRaw(AXIS_MOUSE_Y);
+        Debug.Log($"InputProbe: 마우스가 가로 {mouseX}, 세로 {mouseY}만큼 움직였습니다.");
     }
    
 }
