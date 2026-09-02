@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InputProbe : MonoBehaviour
 {
+    private const string AXIS_HORIZONTAL = "Horizontal";
+    
     private Renderer _renderer;
     private void Awake()
     {
@@ -13,6 +15,7 @@ public class InputProbe : MonoBehaviour
     private void Update()
     {
         ReadToggleKey();
+        ReadAxes();
     }
     
     private void CacheComponents()
@@ -27,6 +30,13 @@ public class InputProbe : MonoBehaviour
             _renderer.enabled = !_renderer.enabled;
             Debug.Log($"InputProbe: 물체의 표시 상태는 {_renderer.enabled}입니다.");
         }
+    }
+
+    private void ReadAxes()
+    {
+        float smoothed = Input.GetAxis(AXIS_HORIZONTAL);
+        float raw = Input.GetAxisRaw(AXIS_HORIZONTAL);
+        Debug.Log($"InputProbe: GetAxis는 {smoothed}, GetAxisRaw는 {raw}입니다.");
     }
     
 
