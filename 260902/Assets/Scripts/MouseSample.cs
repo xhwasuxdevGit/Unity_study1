@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class MouseSample : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private const string AXIS_MOUSE_X = "Mouse X";
+    private const string AXIS_MOUSE_Y = "Mouse Y";
+
+    private void Update()
     {
-        
+        ReadMouseDelta();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ReadMouseDelta()
     {
-        
+        float mouseX = Input.GetAxis(AXIS_MOUSE_X);
+        float mouseY = Input.GetAxis(AXIS_MOUSE_Y);
+        Debug.Log($"MouseSample: 마우스가 가로 {mouseX}, 세로 {mouseY}만큼 움직였습니다.");
     }
 }
