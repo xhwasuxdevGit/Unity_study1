@@ -5,19 +5,33 @@ public class CubeMovement : MonoBehaviour
 {
   
   [SerializeField] private float _moveSpeed;
+  [SerializeField] private float _rotateSpeed;
   [SerializeField] private Transform _target;
   
   private void Update()
   {
-    //Move();
-    MoveTotarget();
+    Move();
+    //MoveTotarget();
+    CubeRotate();
+  }
+
+  private void CubeRotate()
+  {
+    if (Input.GetKey(KeyCode.R))
+    {
+      transform.Rotate(Vector3.up * _rotateSpeed * Time.deltaTime);
+    }
   }
 
   private void MoveTotarget()
   {
-    
-    
-    
+
+    transform.position = Vector3.Lerp(
+      transform.position,
+      _target.position,
+      _moveSpeed * Time.deltaTime
+    );
+
     /*
     transform.position = Vector3.MoveTowards(
       transform.position, _target.position,
@@ -26,7 +40,7 @@ public class CubeMovement : MonoBehaviour
     */
   }
 
-  private void Mover()
+  private void Move()
   {
     float x = Input.GetAxisRaw("Horizontal");
     float z = Input.GetAxisRaw("Vertical");
