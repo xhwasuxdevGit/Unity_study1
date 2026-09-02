@@ -6,13 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneStudy : MonoBehaviour
 {
-   private void Start()
+   [SerializeField] private int _score = 10;
+   
+   private void Awake()
    {
-      LogActiveScene();
+      KeepAlive();
    }
 
-   private void LogActiveScene()
+   private void KeepAlive()
    {
-      Debug.Log($"SceneStudy: 지금 열린 씬은 {SceneManager.GetActiveScene().name}입니다.");
+      DontDestroyOnLoad(gameObject);
+      Debug.Log($"SceneStudy: 씬이 바뀌어도 유지됩니다. 들고 있는 값은 {_score}입니다.");
    }
 }
