@@ -293,7 +293,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
-  _rotateSpeed: 30
 --- !u!65 &1881637337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -465,8 +464,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089531963}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5561991, y: -0.0032432629, z: 0.0021706158, w: -0.8310399}
-  m_LocalPosition: {x: -0.81528693, y: 16.695292, z: -8.280272}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
