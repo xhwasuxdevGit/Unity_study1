@@ -29,7 +29,8 @@ public class AxisMover : MonoBehaviour
 
     private void Move()
     {
-        transform.position += _direction.normalized * _meterPerSecond * Time.deltaTime;
+        //transform.position += _direction.normalized * _meterPerSecond * Time.deltaTime;
+        transform.Translate(_direction.normalized * _meterPerSecond * Time.deltaTime, Space.World);
     }
 
     private void ReportOnce()
