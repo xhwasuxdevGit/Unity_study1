@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlaySwitcher : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   private const string SCENE_TITLE = "TITLE";
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   private void Update()
+   {
+      ReadSceneKeys();
+   }
+
+   private void ReadSceneKeys()
+   {
+      if (Input.GetKeyDown(KeyCode.Return))
+      {
+         Debug.Log($"PlaySwitcher: {SCENE_TITLE} 씬을 부릅니다.");
+         SceneManager.LoadScene(SCENE_TITLE);
+      }
+   }
 }
