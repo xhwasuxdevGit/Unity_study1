@@ -6,6 +6,7 @@ public class InputProbe : MonoBehaviour
 {
     private const string AXIS_HORIZONTAL = "Horizontal";
     [SerializeField] private float _amountPerSecond = 3f;
+    private const int MOUSE_BUTTON_LEFT = 0;
 
     private float _total;
     
@@ -17,8 +18,9 @@ public class InputProbe : MonoBehaviour
 
     private void Update()
     {
-        ReadToggleKey();
-        ReadAxes();
+        //ReadToggleKey();
+        //ReadAxes();
+        ReadMouseButton();
     }
     
     private void CacheComponents()
@@ -42,7 +44,13 @@ public class InputProbe : MonoBehaviour
         _total += raw * _amountPerSecond * Time.deltaTime;
         Debug.Log($"InputProbe: 누적값은 {_total}입니다.");
     }
-    
 
+    private void ReadMouseButton()
+    {
+        if (Input.GetMouseButton(MOUSE_BUTTON_LEFT))
+        {
+            Debug.Log($"InputProbe: 마우스가 클릭한 좌표는 {Input.mousePosition}입니다.");
+        }
+    }
    
 }
