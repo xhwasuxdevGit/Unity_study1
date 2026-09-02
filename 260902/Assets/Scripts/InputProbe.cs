@@ -22,9 +22,9 @@ public class InputProbe : MonoBehaviour
     private void Update()
     {
         //ReadToggleKey();
-        //ReadAxes();
+        ReadAxes();
         //ReadMouseButton();
-        ReadMouseDelta();
+        //ReadMouseDelta();
     }
     
     private void CacheComponents()
@@ -51,7 +51,7 @@ public class InputProbe : MonoBehaviour
 
     private void ReadMouseButton()
     {
-        if (Input.GetMouseButton(MOUSE_BUTTON_LEFT))
+        if (Input.GetMouseButton(2))
         {
             Debug.Log($"InputProbe: 마우스가 클릭한 좌표는 {Input.mousePosition}입니다.");
         }
