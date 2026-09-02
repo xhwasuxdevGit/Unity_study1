@@ -29,7 +29,7 @@ public class AxisMover : MonoBehaviour
 
     private void Move()
     {
-        transform.position += _direction * _meterPerSecond * Time.deltaTime;
+        transform.position += _direction.normalized * _meterPerSecond * Time.deltaTime;
     }
 
     private void ReportOnce()
