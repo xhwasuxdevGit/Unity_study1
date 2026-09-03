@@ -9,7 +9,7 @@ public class TurretController : MonoBehaviour
     [SerializeField] private Transform _playerTansform;
     [SerializeField] private float _rotateSpeed;
     [SerializeField] private float _detectionRange;
-
+    [SerializeField] private float _fireCoolTime;
     private float _elapsed;
     // 총알 생성
       // 총구 위치에
@@ -53,12 +53,19 @@ public class TurretController : MonoBehaviour
         
         _elapsed += Time.deltaTime;
         
-        if (_elapsed > 1f)
+        if (_elapsed >= _fireCoolTime)
         {
-            GameObject bullet = Instantiate(_bulletPrefab);
+            Instantiate(
+                _bulletPrefab,
+                _muzzleTransform.position,
+                _muzzleTransform.rotation
+                );
+            _elapsed = 0;
+            /*
+             GameObject bullet = Instantiate(_bulletPrefab)
             bullet.transform.position = _muzzleTransform.position;
             bullet.transform.rotation = _muzzleTransform.rotation;
-            _elapsed = 0;
+            */
         }
         
         
