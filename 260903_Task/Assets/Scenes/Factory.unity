@@ -348,6 +348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 981272690}
+  - component: {fileID: 981272691}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -370,6 +371,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &981272691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981272689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dcfe5e3e58982f46a24fb868b913b7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _boxPrefab:
+  - {fileID: 6763023271893119174, guid: 8d85799f06f9cf14384e5352eca5029c, type: 3}
+  - {fileID: 6605236683195474237, guid: e6f3cc5e6212e4f4aa0e17e049cf7512, type: 3}
+  - {fileID: 4670906818418162335, guid: 101961f9e29a34c4c8dfcac609f956d6, type: 3}
+  _boxRoot: {fileID: 233343224}
+  _spawnInterval: 2
+  _beltSpeed: 4
+  _lifeSeconds: 0
 --- !u!1 &1882398467
 GameObject:
   m_ObjectHideFlags: 0
