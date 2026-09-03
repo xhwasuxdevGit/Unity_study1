@@ -15,6 +15,7 @@ public class BoxSpawner : MonoBehaviour
     private void Update()
     {
         ReadSpawnKey();
+        CountTime();
     }
 
     private void ReadSpawnKey()
@@ -30,17 +31,29 @@ public class BoxSpawner : MonoBehaviour
         if (_nextIndex < _boxPrefab.Length)
         {
             Vector3 spawnPosition = new Vector3(0f, 0.6f, -10);
-            Instantiate(_boxPrefab[_nextIndex], 
+            GameObject _box = Instantiate(_boxPrefab[_nextIndex], 
                 spawnPosition, Quaternion.identity, _boxRoot);
             _nextIndex++;
+
+            _box.AddComponent<BeltMover>()._speedPerSecond = _beltSpeed;
+            
+            
+            Destroy(_box, _lifeSeconds);
         }
         else
         {
             _nextIndex = 0;
         }
+    }
 
-        
-        
+    private void CountTime()
+    {
+        _elapsed += Time.deltaTime;
+        if (_elapsed >= _spawnInterval)
+        {
+            SpawnOne();
+            _elapsed = 0;
+        }
     }
 
 }
