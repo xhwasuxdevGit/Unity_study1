@@ -34,6 +34,11 @@ public class CubeController : MonoBehaviour
             Debug.Log($"{gameObject.name} : {collision.gameObject.name}랑 떨어짐");
         }
 
+        public void TakeDamage(float damage)
+        {
+            Debug.Log($"데미지 입음: {damage}");
+        }
+
 
         // Trigger (특정 이벤트의 트리거 역할)
 }
