@@ -15,24 +15,18 @@ public class CubeController : MonoBehaviour
 
    private void RayShot()
    {
-      if (!Input.GetKeyDown(KeyCode.Space)) return;
-      
       Ray ray = new Ray(transform.position, transform.forward);
-
-      RaycastHit[] hits = Physics.RaycastAll(ray, 10f);
-
-      if (hits.Length > 0)
+      
+      RaycastHit hit;
+      if (Physics.Raycast(ray, out hit))
       {
-         foreach (RaycastHit hit in hits)
-         {
-            Debug.Log(hit.transform.name);
-         }
+         Debug.Log(hit.transform.name);
       }
    }
 
    private void OnDrawGizmos()
    {
       Gizmos.color = Color.green;
-      Gizmos.DrawRay(transform.position, transform.forward*10);
+      Gizmos.DrawRay(transform.position, transform.forward * 5);
    }
 }
