@@ -7,44 +7,62 @@ using Vector3 = UnityEngine.Vector3;
 
 public class CubeController : MonoBehaviour
 {
+   private Camera _cam;
+   [SerializeField] private UnitMovement _target;
+
+   private void Start()
+   {
+      _cam = Camera.main;
+   }
+   
    
    private void Update()
    {
       RayShot();
+      MoveTarget();
    }
 
    private void RayShot()
    {
-      Ray ray = new Ray(transform.position, transform.forward);
-      
+      if (!Input.GetMouseButtonDown(0)) return;
+       
+      Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
       RaycastHit hit;
+
       if (Physics.Raycast(ray, out hit))
       {
-         Debug.Log(hit.transform.name);
-
-      if (!Input.GetKeyDown(KeyCode.Space)) return;
-      
-      Ray ray = new Ray(transform.position, transform.forward);
-
-      RaycastHit[] hits = Physics.RaycastAll(ray, 10f);
-
-      if (hits.Length > 0)
-      {
-         foreach (RaycastHit hit in hits)
+         if (hit.transform.CompareTag("Ground"))
          {
-            Debug.Log(hit.transform.name);
+            _target = null;
+            return;
+              
          }
-
+         Debug.Log($"{hit.transform.name} 선택");
+         _target = hit.transform.GetComponent<UnitMovement>();
+           
       }
-   }
-
-   private void OnDrawGizmos()
-   {
-      Gizmos.color = Color.green;
-
-      Gizmos.DrawRay(transform.position, transform.forward * 5);
-
-      Gizmos.DrawRay(transform.position, transform.forward*10);
+      else
+      {
+         _target = null;
+         return;   
+      }
 
    }
+
+
+   private void MoveTarget()
+      {
+         if (!Input.GetMouseButtonDown(1) || _target == null) return;
+       
+         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+         RaycastHit hit;
+
+         if (Physics.Raycast(ray, out hit))
+         {
+            if (!hit.transform.CompareTag("Ground")) return;
+
+            _target.SetDestination(hit.point);
+            return;
+         }
+      }
 }
