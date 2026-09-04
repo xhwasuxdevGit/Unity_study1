@@ -8,12 +8,11 @@ public class TriggerStudy : MonoBehaviour
    private void OnTriggerEnter(Collider other)
    {
       Debug.Log($"{gameObject.name} : 트리거 안에 {other.gameObject.name} 들어옴");
+      IDamageable d = other.gameObject.GetComponent<IDamageable>();
       
-      if (other.gameObject.CompareTag("Player"))
+      if (d != null)
       {
-         Debug.Log("플레이어가 범위 내로 들어왔음. 문열기");
-         CubeController c = other.gameObject.GetComponent<CubeController>();
-         c.TakeDamage(10);
+         d.TakeDamage(10);
       }
      
    }
