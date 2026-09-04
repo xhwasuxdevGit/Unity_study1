@@ -7,38 +7,26 @@ using Vector3 = UnityEngine.Vector3;
 
 public class CubeController : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
+   
+   private void Update()
+   {
+      RayShot();
+   }
 
-    private void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-    }
+   private void RayShot()
+   {
+      Ray ray = new Ray(transform.position, transform.forward);
+      
+      RaycastHit hit;
+      if (Physics.Raycast(ray, out hit))
+      {
+         Debug.Log(hit.transform.name);
+      }
+   }
 
-    // Collision
-        // - Enter : 충돌이 시작됐을 때
-        // - stay : 충돌이 유지되고 있을 때
-        // - Exit : 충돌이 종료됐을 때
-        
-        private void OnCollisionEnter(Collision collision)
-        {
-            Debug.Log($"{gameObject.name} : {collision.gameObject.name}랑 충돌했다");
-        }
-
-        private void OnCollisionStay(Collision collision)
-        {Debug.Log($"{gameObject.name} : {collision.gameObject.name}랑 붙어있음");
-           
-        }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            Debug.Log($"{gameObject.name} : {collision.gameObject.name}랑 떨어짐");
-        }
-
-        public void TakeDamage(float damage)
-        {
-            Debug.Log($"데미지 입음: {damage}");
-        }
-
-
-        // Trigger (특정 이벤트의 트리거 역할)
+   private void OnDrawGizmos()
+   {
+      Gizmos.color = Color.green;
+      Gizmos.DrawRay(transform.position, transform.forward * 5);
+   }
 }
