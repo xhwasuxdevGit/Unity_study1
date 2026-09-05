@@ -48,6 +48,8 @@ public class CubeController : MonoBehaviour
       }
 
    }
+
+
    private void MoveTarget()
       {
          if (!Input.GetMouseButtonDown(1) || _target == null) return;
