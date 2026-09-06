@@ -7,60 +7,32 @@ using Vector3 = UnityEngine.Vector3;
 
 public class CubeController : MonoBehaviour
 {
-   private Camera _cam;
-   [SerializeField] private UnitMovement _target;
-
-   private void Start()
-   {
-      _cam = Camera.main;
-   }
-   
    
    private void Update()
    {
       RayShot();
-      MoveTarget();
    }
 
    private void RayShot()
    {
-      if (!Input.GetMouseButtonDown(0)) return;
-       
-      Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-      RaycastHit hit;
+      if (!Input.GetKeyDown(KeyCode.Space)) return;
+      
+      Ray ray = new Ray(transform.position, transform.forward);
 
-      if (Physics.Raycast(ray, out hit))
+      RaycastHit[] hits = Physics.RaycastAll(ray, 10f);
+
+      if (hits.Length > 0)
       {
-         if (hit.transform.CompareTag("Ground"))
+         foreach (RaycastHit hit in hits)
          {
-            _target = null;
-            return;
-              
+            Debug.Log(hit.transform.name);
          }
-         Debug.Log($"{hit.transform.name} 선택");
-         _target = hit.transform.GetComponent<UnitMovement>();
-           
       }
-      else
-      {
-         _target = null;
-         return;   
-      }
-
    }
-   private void MoveTarget()
-      {
-         if (!Input.GetMouseButtonDown(1) || _target == null) return;
-       
-         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-         RaycastHit hit;
 
-         if (Physics.Raycast(ray, out hit))
-         {
-            if (!hit.transform.CompareTag("Ground")) return;
-
-            _target.SetDestination(hit.point);
-            return;
-         }
-      }
+   private void OnDrawGizmos()
+   {
+      Gizmos.color = Color.green;
+      Gizmos.DrawRay(transform.position, transform.forward*10);
+   }
 }
