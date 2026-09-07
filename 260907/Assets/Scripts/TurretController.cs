@@ -114,11 +114,11 @@ public class TurretController : MonoBehaviour
         if (!_isPlayerInTrigger) return;
 
         Vector3 from = new Vector3(transform.position.x,
-            transform.position.y + _muzzlePoint.position.y,
+            transform.position.y + _muzzlePoint.position.y / 2,
             transform.position.z);
 
         Vector3 to = new Vector3(_playerTransform.position.x,
-            _playerTransform.position.y + _muzzlePoint.position.y,
+            _playerTransform.position.y + _muzzlePoint.position.y / 2,
             _playerTransform.position.z);
         
         Ray ray = new Ray(from, (to - from).normalized);
