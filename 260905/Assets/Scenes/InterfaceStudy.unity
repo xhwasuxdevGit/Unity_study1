@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 641336005}
   m_Layer: 0
   m_Name: Sphere (1)
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -263,7 +263,7 @@ Transform:
   m_GameObject: {fileID: 641336004}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3818851, y: 2.4375482, z: 1.82}
+  m_LocalPosition: {x: 2, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -370,7 +370,7 @@ Transform:
   m_GameObject: {fileID: 817210200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2, y: 2.4375482, z: -0.17003727}
+  m_LocalPosition: {x: 3.5, y: 1, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -461,8 +461,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845892730}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.56612897, y: -0.003691509, z: 0.0025552379, w: 0.82430446}
-  m_LocalPosition: {x: -0.07644889, y: 11.942911, z: -3.7702405}
+  m_LocalRotation: {x: -0.7013626, y: -0.0017128589, z: 0.0016853207, w: -0.7128007}
+  m_LocalPosition: {x: -0.21139853, y: 9.273014, z: 0.03872308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 1463471483}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -663,7 +663,7 @@ Transform:
   m_GameObject: {fileID: 1463471478}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3818851, y: 2.4375482, z: -0.17003727}
+  m_LocalPosition: {x: -2, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 1818850171}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -871,6 +871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55824e3ef20fedb458eb87aae590a7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _detectRange: 8
 --- !u!1 &1834882948
 GameObject:
   m_ObjectHideFlags: 0
