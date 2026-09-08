@@ -55,10 +55,9 @@ public class GrenadeController : MonoBehaviour
 
    private void ThrowGrenade()
    {
-
-      if (_keydownTimer > 3.0f )
+      if (Input.GetKeyUp(KeyCode.Alpha3))
       {
-         if (Input.GetKeyUp(KeyCode.Alpha3))
+         if (_keydownTimer > 3.0f )
          {
             MoveGrenade();
             _keydownTimer = 0.0f;
