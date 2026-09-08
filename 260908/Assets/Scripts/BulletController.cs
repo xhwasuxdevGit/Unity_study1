@@ -35,13 +35,13 @@ public class BulletController : MonoBehaviour
     }
 
         //터렛으로부터 데이터 전달 받기  
-        public void SetData(int damage, float speed, float destroyDelay)
-      {
-          _damage = damage;
-          _speed = speed;
+    public void SetData(int damage, float speed, float destroyDelay)
+    {
+        _damage = damage;
+        _speed = speed;
           
-          Destroy(gameObject, destroyDelay);
-      }
+        Destroy(gameObject, destroyDelay);
+    }
 
    
       
