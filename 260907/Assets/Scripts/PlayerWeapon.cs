@@ -10,39 +10,112 @@ public class PlayerWeapon : MonoBehaviour
     private Transform _cameraTransform;
     
     [SerializeField] private KeyCode _fireKey = KeyCode.Mouse0;
-
+    [SerializeField] private KeyCode _reloadKey = KeyCode.R;
     [SerializeField] private float _range;
-    
     [SerializeField] private int _damage;
-
     [SerializeField] private float _AttackCooldown;
-    private bool _isPressdFire => Input.GetKeyDown(_fireKey);
-    private float _currentCooldown;
+    [SerializeField] private int _maxAmmo;
+    [SerializeField] private FlameObject _flameEffect;
+    [SerializeField] private FlameObject _bulletImpactEffectPrefab;
     
+    private float _currentCooldown;
+    private int _currentAmmo;
 
+
+    private bool _isPressedFire => Input.GetKey(_fireKey);
+    private bool _isPressdReload => Input.GetKeyDown(_reloadKey);
     private bool _isReadyToAttack
     {
         get { return _currentCooldown >= _AttackCooldown; }
     }
+    private bool _isEnoughAmmo
+    {
+       get { return _currentAmmo > 0; }
+    }
+
+    private bool _canFire => _isPressedFire && _isReadyToAttack && _isEnoughAmmo;
+    
+    
+    //----------------------------------------------------------------------
 
     private void Awake()
     {
         CacheComponents();
+       
     }
+
+    private void Start()
+    {
+        SetDefault();
+    }
+
+    private void Update()
+    {
+        UpdateCurrentCooldown();
+    }
+
+    
+    //----------------------------------------------------------------------
+    private void CacheComponents()
+    {
+        _cameraTransform = Camera.main.transform;
+    }
+
+    private void SetDefault()
+    {
+        _currentCooldown = 0f;
+        _currentAmmo = _maxAmmo;
+    }
+    
     
     public void Fire()
     {
-        if (!_isPressdFire || !_isReadyToAttack) return;
+        if (!_canFire) return;
         
-
-        IDamageable damageable = GetDamageable();
-
-        if (damageable == null) return;
+        _currentAmmo--;
+        _currentCooldown = 0f;
+        PlayFlameobject();
+        
+        if (!TryGetDamageable(out IDamageable damageable)) return;
         
         damageable.TakeDamage(_damage);
+        
         Debug.Log($"PlayweWeapon: {damageable.GameObject.name}에게 발사");
+        Debug.Log($"PlayerWeapon: 남은 총알: {_currentAmmo}");
+        
+    }
 
-        _currentCooldown = 0f;
+    private void PlayFlameobject()
+    {
+        _flameEffect.gameObject.SetActive(true);
+        _flameEffect.Play();
+    }
+
+    private void PlaybulletImpactEffect(RaycastHit hit)
+    {
+        Transform effectTransform = Instantiate(_bulletImpactEffectPrefab).transform;
+        effectTransform.position = hit.point;
+        effectTransform.forward = hit.normal;
+        effectTransform.gameObject.SetActive(true);
+
+    }
+
+    private bool TryGetDamageable(out IDamageable damageable)
+    {
+        bool result = false;
+        damageable = null;
+
+        Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, _range))
+        {
+            PlaybulletImpactEffect(hit);
+            result = hit.transform.TryGetComponent(out damageable);
+        }
+        
+        return result;
+
     }
 
     public void UpdateCurrentCooldown()
@@ -51,24 +124,18 @@ public class PlayerWeapon : MonoBehaviour
         _currentCooldown += Time.deltaTime;
     }
 
-    private IDamageable GetDamageable()
+    public void AmmoReload()
     {
-        Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
-        RaycastHit hit;
-        IDamageable damageable = null;
-
-        if (Physics.Raycast(ray, out hit, _range))
+        if (!_isPressdReload) return;
         {
-            damageable = hit.transform.GetComponent<IDamageable>();
+            Debug.Log("PlayerWeapon: 재장전 중");
+            _currentAmmo = _maxAmmo;
         }
-
-        return damageable;
-
+        
     }
 
-    private void CacheComponents()
-    {
-        _cameraTransform = Camera.main.transform;
-    }
+
+
+
     
 }
