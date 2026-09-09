@@ -9,6 +9,7 @@ public class TurretController : MonoBehaviour
     [SerializeField] private float _cooldown;
     [SerializeField] private Transform _headTransform;
     [SerializeField] Transform _muzzlePoint;
+    [SerializeField] private LayerMask _targetLayer;
 
     [Header("Bullet")] 
     [SerializeField] private BulletController _bulletPrefab;
@@ -17,13 +18,12 @@ public class TurretController : MonoBehaviour
     [SerializeField] private float _bulletDestoryDelay;
     
     private float _currentCooldown;
-    private const string TAG_PLAYER = "Player";
+    private const string LAYER_PLAYER = "Player";
     
     
     private Transform _playerTransform;
     private SphereCollider _sphereCollider;
     private bool _isPlayerInTrigger => _playerTransform != null;
-    // _isPlayerInTrigger의 처리를 간소화한 표기(람다식)
     private bool _isPlayerInsight = false;
     private bool _isReadyToFire
     {
@@ -38,17 +38,18 @@ public class TurretController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(TAG_PLAYER))
+        if (other.gameObject.layer == LayerMask.NameToLayer(LAYER_PLAYER))
         {
             _playerTransform = other.transform;
-            // _isPlayerInTrigger =  true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // if (other.CompareTag(TAG_PLAYER)) { _playerTransform = null; }
-        
+        if (other.gameObject.layer == LayerMask.NameToLayer(LAYER_PLAYER))
+        {
+            _playerTransform = null;
+        }
         
     }
 
@@ -100,7 +101,6 @@ public class TurretController : MonoBehaviour
         
         bullet.SetData(_bulletDamage, _bulletDamage, _bulletDestoryDelay);
 
-        // SetData
     }
     
     private void Rotate()
@@ -115,27 +115,23 @@ public class TurretController : MonoBehaviour
         if (!_isPlayerInTrigger) return;
 
         Vector3 from = new Vector3(transform.position.x,
-            transform.position.y + _muzzlePoint.position.y / 2,
+            transform.position.y + _muzzlePoint.position.y,
             transform.position.z);
 
         Vector3 to = new Vector3(_playerTransform.position.x,
-            _playerTransform.position.y + _muzzlePoint.position.y / 2,
+            _playerTransform.position.y + _muzzlePoint.position.y,
             _playerTransform.position.z);
         
         Ray ray = new Ray(from, (to - from).normalized);
         RaycastHit hit;
+       
 
-        if (Physics.Raycast(ray, out hit, _sphereCollider.radius))
+        if (Physics.Raycast(ray, out hit, _sphereCollider.radius, _targetLayer))
         {
-            if (hit.transform.CompareTag(TAG_PLAYER))
-            {
-                Debug.Log("플레이어 감지됨");
-                _isPlayerInsight = true;
-            }
-         
+            Debug.Log("플레이어 감지됨");
+            _isPlayerInsight = true;
         }
-
-
+        
     }
 
 }

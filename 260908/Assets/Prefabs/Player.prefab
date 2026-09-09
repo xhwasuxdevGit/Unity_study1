@@ -105,9 +105,9 @@ GameObject:
   - component: {fileID: 1356765644469340273}
   - component: {fileID: 313994613765401177}
   - component: {fileID: 3828416799515352350}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,6 +194,7 @@ MonoBehaviour:
   _cameraPivot: {fileID: 92382670364569686}
   _detectionRange: 4
   _interactionKey: 101
+  _maxHp: 0
 --- !u!114 &3828416799515352350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,9 +261,11 @@ MonoBehaviour:
   _reloadKey: 114
   _range: 2
   _damage: 10
-  _AttackCooldown: 0.3
+  _attackCooldown: 0
   _maxAmmo: 30
+  SteampackDuration: 0
   _flameEffect: {fileID: 84259372675615180}
+  _bulletImpactEffectPrefab: {fileID: 0}
 --- !u!1 &2772291313876456070
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,6 +848,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectDelay: 0.3
+  _playInstant: 0
+  _isDestory: 0
 --- !u!1001 &6488280620169468960
 PrefabInstance:
   m_ObjectHideFlags: 0

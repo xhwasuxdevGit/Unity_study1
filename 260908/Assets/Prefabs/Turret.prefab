@@ -93,6 +93,9 @@ MonoBehaviour:
   _cooldown: 0.3
   _headTransform: {fileID: 1322256861453506567}
   _muzzlePoint: {fileID: 2309520521195993249}
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
   _bulletPrefab: {fileID: 9201348482844826806, guid: 5f095fa4a54029549ae645821ddf1605, type: 3}
   _bulletDamage: 10
   _bulletSpeed: 0.5

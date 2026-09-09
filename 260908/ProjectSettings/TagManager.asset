@@ -8,10 +8,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - GroupA
+  - 
   - Water
   - UI
-  - GroupB
+  - 
   - Player
   - Enemy
   - Ground

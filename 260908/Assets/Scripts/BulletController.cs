@@ -6,21 +6,18 @@ public class BulletController : MonoBehaviour
 {
     private int _damage;
     private float _speed;
-    private const string TAG_PLAYER = "Player";
-    // 스폰 기준으로 제한시간 이후 파괴
-    // 장애물과 충돌할경우
-    // 플레이어 -> 데미지를 입히고
+    private const string LAYER_PLAYER = "Player";
+    
     // 벽인 경우 -> 파괴
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(TAG_PLAYER))
+        if (other.gameObject.layer == LayerMask.NameToLayer(LAYER_PLAYER))
         {
             // ToDo 데미지 입히기 구현
             Debug.Log("플레이어 데미지 입음");
         }
         
         Destroy(gameObject);
-            
     }
     
       private void Update()

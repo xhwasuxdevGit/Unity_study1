@@ -472,6 +472,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1437445139622539066, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8984058284873480504, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -617,6 +621,10 @@ PrefabInstance:
     - target: {fileID: 993166987059011783, guid: 6b158af0de634bd4d9dab7e147c1b92b, type: 3}
       propertyPath: m_Name
       value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 3243996029984028655, guid: 6b158af0de634bd4d9dab7e147c1b92b, type: 3}
+      propertyPath: _targetLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 7924847939429267291, guid: 6b158af0de634bd4d9dab7e147c1b92b, type: 3}
       propertyPath: m_LocalPosition.x
