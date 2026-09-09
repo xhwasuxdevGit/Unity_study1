@@ -8,22 +8,11 @@ public class GrenadeController : MonoBehaviour
    [SerializeField] private GrenadeObject _grenadePrefab;
    [SerializeField] private Transform _grenadeSpwanPoint;
    
-   private Rigidbody _rigidbody;
    private float _keydownTimer;
    private float _throwUpForce = 15.0f; 
    private float _thrwoForwardForce = 10.0f; 
    private Vector3 _throwDirection;
-   private GrenadeObject _grenade;
-   
-   private void Awake()
-   {
-      CacheComponents();
-   }
-
-   private void Start()
-   {
-    
-   }
+  
    
    private void Update()
    {
@@ -34,13 +23,6 @@ public class GrenadeController : MonoBehaviour
    {
       ThrowGrenade();
    }
-
-   private void CacheComponents()
-   {
-      _rigidbody = _grenadePrefab.GetComponent<Rigidbody>();
-   }
-   
-
 
    private void ReadyGrenade()
    {
@@ -72,20 +54,19 @@ public class GrenadeController : MonoBehaviour
    private void MoveGrenade()
    {
      Debug.Log("수류탄 움직이는 중");
-      _rigidbody.isKinematic = false;
+      _grenadePrefab.Rigidbody.isKinematic = false;
       _throwDirection = (Vector3.forward * _thrwoForwardForce) + (Vector3.up * _throwUpForce); 
-      _rigidbody.AddForce(_throwDirection);
-      _grenade.SetTimer();
+      _grenadePrefab.Rigidbody.AddForce(_throwDirection);
+      _grenadePrefab.SetTimer();
    
    }
 
    private void SpwanGrenade()
    {
-         _grenade = Instantiate(_grenadePrefab, 
+         Instantiate(_grenadePrefab, 
          _grenadeSpwanPoint.transform.position,
          _grenadeSpwanPoint.transform.rotation);
       Debug.Log("수류탄 생성!");   
-         
    }
    
    

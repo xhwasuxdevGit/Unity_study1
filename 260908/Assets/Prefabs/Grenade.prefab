@@ -80,7 +80,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosionDelay: 3
+  _explosionEffect: {fileID: 0}
 --- !u!1 &4699977135021405004
 GameObject:
   m_ObjectHideFlags: 0

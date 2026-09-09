@@ -17,7 +17,6 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private int _maxAmmo;
     [SerializeField] private int SteampackDuration;
     [SerializeField] private FlameObject _flameEffect;
-    [SerializeField] private FlameObject _bulletImpactEffectPrefab;
     
     public float AttackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
     
@@ -42,7 +41,6 @@ public class PlayerWeapon : MonoBehaviour
     private void Awake()
     {
         CacheComponents();
-       
     }
 
     private void Start()
@@ -95,7 +93,7 @@ public class PlayerWeapon : MonoBehaviour
 
     private void PlaybulletImpactEffect(RaycastHit hit)
     {
-        Transform effectTransform = Instantiate(_bulletImpactEffectPrefab).transform;
+        Transform effectTransform = Instantiate(_flameEffect).transform;
         effectTransform.position = hit.point;
         effectTransform.forward = hit.normal;
         effectTransform.gameObject.SetActive(true);

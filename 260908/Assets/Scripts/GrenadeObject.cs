@@ -7,17 +7,19 @@ public class GrenadeObject : MonoBehaviour
     [SerializeField] private float _explosionDelay;
     [SerializeField] private GameObject _explosionEffect;
 
-    private Transform _transform;
+    private Rigidbody _rigidbody;
+    public Rigidbody Rigidbody => _rigidbody;
+    
     private float _timer;
 
     private void Awake()
     {
-        
+        CacheComponents();
     }
 
     private void CacheComponents()
     {
-        _transform = GetComponent<Transform>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
     
 

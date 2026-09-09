@@ -9,7 +9,6 @@ public class TurretController : MonoBehaviour
     [SerializeField] private float _cooldown;
     [SerializeField] private Transform _headTransform;
     [SerializeField] Transform _muzzlePoint;
-    [SerializeField] private LayerMask _targetLayer;
    
     [Header("Bullet")] 
     [SerializeField] private BulletController _bulletPrefab;
@@ -17,53 +16,35 @@ public class TurretController : MonoBehaviour
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private float _bulletDestoryDelay;
     
-    
-    
+    private TurretSensor _turretSensor;
     private float _currentCooldown;
-    private const string LAYER_PLAYER = "Player";
-    private Transform _playerTransform;
-   
-    private bool _isPlayerInTrigger => _playerTransform != null;
-    private bool _isPlayerInsight = false;
-    private bool _isReadyToFire
-    {
-        get { return _currentCooldown >= _cooldown; }
-    }
     
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer(LAYER_PLAYER))
-        {
-            _playerTransform = other.transform;
-        }
-    }
-    
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer(LAYER_PLAYER))
-        {
-            _playerTransform = null;
-        }
-        
-    }
+    private bool _isReadyToFire { get { return _currentCooldown >= _cooldown; } }
 
+    private void Awake()
+    {
+        CacheComponent();
+    }
     private void Update()
     {
         UpdateCurrentCooldown();
-        RayShotToPlayer();
         Rotate();
         Fire();
     }
     //------------------------------------------------------------
-    
+
+    private void CacheComponent()
+    {
+        _turretSensor = GetComponentInChildren<TurretSensor>();
+    }
 
     private void Fire()
     {
-        if (!_isPlayerInsight || !_isPlayerInTrigger) return;
+        if (!_turretSensor.IsAwarePlayer) return;
         
-        Vector3 look = new Vector3(_playerTransform.position.x,
+        Vector3 look = new Vector3(_turretSensor.PlayerTransform.position.x,
             _headTransform.position.y,
-            _playerTransform.position.z);
+            _turretSensor.PlayerTransform.position.z);
         
         _headTransform.LookAt(look);
 
@@ -95,32 +76,10 @@ public class TurretController : MonoBehaviour
     
     private void Rotate()
     {
-        if (_isPlayerInsight) return;
+        if (_turretSensor.IsPlayerInsight) return;
+        
         _headTransform.Rotate(Vector3.up, _rotateSpeed * Time.deltaTime);
     }
-
-    private void RayShotToPlayer()
-    {
-       _isPlayerInsight = false;
-        if (!_isPlayerInTrigger) return;
-
-        Vector3 from = new Vector3(transform.position.x,
-            transform.position.y + _muzzlePoint.position.y,
-            transform.position.z);
-
-        Vector3 to = new Vector3(_playerTransform.position.x,
-            _playerTransform.position.y + _muzzlePoint.position.y,
-            _playerTransform.position.z);
-        
-        Ray ray = new Ray(from, (to - from).normalized);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 10, _targetLayer))
-        {
-            Debug.Log("플레이어 감지됨");
-            _isPlayerInsight = true;
-        }
-        
-    }
+    
 
 }
