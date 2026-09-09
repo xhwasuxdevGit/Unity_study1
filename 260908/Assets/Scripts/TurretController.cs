@@ -10,30 +10,24 @@ public class TurretController : MonoBehaviour
     [SerializeField] private Transform _headTransform;
     [SerializeField] Transform _muzzlePoint;
     [SerializeField] private LayerMask _targetLayer;
-
+   
     [Header("Bullet")] 
     [SerializeField] private BulletController _bulletPrefab;
     [SerializeField] private int _bulletDamage;
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private float _bulletDestoryDelay;
     
+    
+    
     private float _currentCooldown;
     private const string LAYER_PLAYER = "Player";
-    
-    
     private Transform _playerTransform;
-    private SphereCollider _sphereCollider;
+   
     private bool _isPlayerInTrigger => _playerTransform != null;
     private bool _isPlayerInsight = false;
     private bool _isReadyToFire
     {
         get { return _currentCooldown >= _cooldown; }
-    }
-    
-
-    private void Awake()    // 람다식 활용 가능 도전해보자
-    {
-        CacheComponents();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -43,7 +37,7 @@ public class TurretController : MonoBehaviour
             _playerTransform = other.transform;
         }
     }
-
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(LAYER_PLAYER))
@@ -62,10 +56,6 @@ public class TurretController : MonoBehaviour
     }
     //------------------------------------------------------------
     
-    private void CacheComponents()
-    {
-        _sphereCollider = GetComponent<SphereCollider>();
-    }
 
     private void Fire()
     {
@@ -124,9 +114,8 @@ public class TurretController : MonoBehaviour
         
         Ray ray = new Ray(from, (to - from).normalized);
         RaycastHit hit;
-       
 
-        if (Physics.Raycast(ray, out hit, _sphereCollider.radius, _targetLayer))
+        if (Physics.Raycast(ray, out hit, 10, _targetLayer))
         {
             Debug.Log("플레이어 감지됨");
             _isPlayerInsight = true;

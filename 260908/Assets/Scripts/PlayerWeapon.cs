@@ -18,8 +18,8 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private int SteampackDuration;
     [SerializeField] private FlameObject _flameEffect;
     [SerializeField] private FlameObject _bulletImpactEffectPrefab;
-    public float AttackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
     
+    public float AttackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
     
     private float _currentCooldown;
     private int _currentAmmo;
@@ -60,6 +60,7 @@ public class PlayerWeapon : MonoBehaviour
     private void CacheComponents()
     {
         _cameraTransform = Camera.main.transform;
+        
     }
 
     private void SetDefault()
