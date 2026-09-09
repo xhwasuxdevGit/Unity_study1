@@ -18,7 +18,10 @@ public class TurretController : MonoBehaviour
     
     private float _currentCooldown;
     private const string TAG_PLAYER = "Player";
+    
+    
     private Transform _playerTransform;
+    private SphereCollider _sphereCollider;
     private bool _isPlayerInTrigger => _playerTransform != null;
     // _isPlayerInTrigger의 처리를 간소화한 표기(람다식)
     private bool _isPlayerInsight = false;
@@ -26,7 +29,7 @@ public class TurretController : MonoBehaviour
     {
         get { return _currentCooldown >= _cooldown; }
     }
-    private SphereCollider _sphereCollider;
+    
 
     private void Awake()    // 람다식 활용 가능 도전해보자
     {
@@ -44,11 +47,9 @@ public class TurretController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(TAG_PLAYER))
-        {
-            _playerTransform = null;
-            // _isPlayerInTrigger =  false;
-        }
+        // if (other.CompareTag(TAG_PLAYER)) { _playerTransform = null; }
+        
+        
     }
 
     private void Update()
