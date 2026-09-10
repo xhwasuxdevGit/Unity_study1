@@ -20,6 +20,11 @@ public class GrenadeController : MonoBehaviour
       CacheCompoments();
    }
 
+   private void OnDestroy()
+   {
+      Explode();
+   }
+
    private void CacheCompoments()
    {
       _rigidbody = GetComponent<Rigidbody>();
@@ -57,6 +62,12 @@ public class GrenadeController : MonoBehaviour
    private void SetTimer()
    {
       Destroy(gameObject, _explosionDelay);
+   }
+
+   private void Explode()
+   {
+      // 폭발 애니메이션 적용
+      // 인터페이스 활용해서 데미지 입히기
    }
 
 
