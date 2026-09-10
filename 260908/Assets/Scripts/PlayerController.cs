@@ -19,7 +19,13 @@ public class PlayerController : MonoBehaviour, IInteractor
     
     public GameObject GameObject { get => gameObject; }
     public int CurrentHp { get; set; }
-
+    
+    private float _keydownTimer;
+    private bool _isPressedKey => Input.GetKey(KeyCode.Alpha3);
+    private bool _isKeyup => Input.GetKeyUp(KeyCode.Alpha3);
+    private bool _chargeKey => _keydownTimer > 1.0f;
+    private bool _readyInput => _isKeyup && _chargeKey;
+    public bool ReadyInput => _readyInput;
 
     //-------------------------------------------------------
     private void Awake()
@@ -125,5 +131,19 @@ public class PlayerController : MonoBehaviour, IInteractor
         _targetInteractable.Interact(this);
         _targetInteractable = null;
     }
-    
+
+    public void ReadyGrenade()
+    {
+        if (_isPressedKey)
+        {
+            _keydownTimer += Time.deltaTime;
+            Debug.Log("GrenadeController: 수류탄 장전중!");
+
+            if (_readyInput)
+            {
+                Debug.Log("GrenadeController: 수류탄 장전완료!");
+                _keydownTimer = 0;
+            }
+        }
+    }
 }

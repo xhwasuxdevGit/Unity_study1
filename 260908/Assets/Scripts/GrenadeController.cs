@@ -8,12 +8,12 @@ public class GrenadeController : MonoBehaviour
    [SerializeField] private Transform _grenadeSpwanPoint;
    [SerializeField] private float _explosionDelay;
    [SerializeField] private GameObject _explosionEffect;
-
+   [SerializeField] private PlayerController _player;
    private Rigidbody _rigidbody;
-   private float _keydownTimer;
    private float _throwUpForce = 15.0f; 
    private float _thrwoForwardForce = 10.0f; 
    private Vector3 _throwDirection;
+   
 
    private void Awake()
    {
@@ -23,45 +23,22 @@ public class GrenadeController : MonoBehaviour
    private void CacheCompoments()
    {
       _rigidbody = GetComponent<Rigidbody>();
+      _player = GetComponent<PlayerController>();
    }
-
-
-
-   private void Update()
-   {
-      ReadyGrenade();
-   }
-
+   
    private void FixedUpdate()
    {
       ThrowGrenade();
    }
 
-   private void ReadyGrenade()
-   {
-      if (Input.GetKey(KeyCode.Alpha3))
-      {
-         _keydownTimer += Time.deltaTime;
-         
-         Debug.Log("GrenadeController: 수류탄 장전중!");
-      }
-      
-   }
-
    private void ThrowGrenade()
    {
-      if (Input.GetKeyUp(KeyCode.Alpha3))
+      if (_player.ReadyInput)
       {
-         if (_keydownTimer > 1.0f )
-         {
-            SpwanGrenade();
-            MoveGrenade();
-            _keydownTimer = 0.0f;
-            Debug.Log("GrenadeController: 수류탄 투척!");
-            
-         }
+         SpwanGrenade();
+         MoveGrenade();
+         Debug.Log("GrenadeController: 수류탄 투척!");
       }
-      
    }
 
    private void MoveGrenade()
