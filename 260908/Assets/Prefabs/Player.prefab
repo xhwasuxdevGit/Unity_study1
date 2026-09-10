@@ -228,6 +228,7 @@ MonoBehaviour:
   _detectionRange: 4
   _interactionKey: 101
   _maxHp: 50
+  _grenade: {fileID: 7481273845106128564, guid: 8174c6f24024939469b9507ddbfec19b, type: 3}
 --- !u!114 &3828416799515352350
 MonoBehaviour:
   m_ObjectHideFlags: 0

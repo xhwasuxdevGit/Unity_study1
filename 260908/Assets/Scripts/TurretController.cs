@@ -8,7 +8,7 @@ public class TurretController : MonoBehaviour
     [SerializeField] private float _rotateSpeed;
     [SerializeField] private float _cooldown;
     [SerializeField] private Transform _headTransform;
-    [SerializeField] Transform _muzzlePoint;
+    [SerializeField] private Transform _muzzlePoint;
    
     [Header("Bullet")] 
     [SerializeField] private BulletController _bulletPrefab;

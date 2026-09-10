@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, IInteractor
     [SerializeField] private float _detectionRange;
     [SerializeField] private KeyCode _interactionKey = KeyCode.E;
     [SerializeField] private int _maxHp;
+    [SerializeField] private GrenadeController _grenade;
     private PlayerMovement _movement;
     private PlayerWeapon _weapon;
     private Transform _cameraTransform;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour, IInteractor
     private void FixedUpdate()
     {
         _movement.Move();
+        _grenade.ThrowGrenade();
     }
 
     private void Update()
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour, IInteractor
         _weapon.AmmoReload();
         DetectInteractable();
         TryInteract();
+        ReadyGrenade();
     }
 
     private void LateUpdate()
@@ -134,6 +137,8 @@ public class PlayerController : MonoBehaviour, IInteractor
 
     public void ReadyGrenade()
     {
+        if(!_isPressedKey) return;
+        
         if (_isPressedKey)
         {
             _keydownTimer += Time.deltaTime;
@@ -141,8 +146,12 @@ public class PlayerController : MonoBehaviour, IInteractor
 
             if (_readyInput)
             {
-                Debug.Log("GrenadeController: 수류탄 장전완료!");
+                Debug.Log("GrenadeController: 수류탄 발사!");
                 _keydownTimer = 0;
+            }
+            else
+            {
+                Debug.Log("GrenadeController: 수류탄 장전완료");
             }
         }
     }

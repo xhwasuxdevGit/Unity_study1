@@ -26,18 +26,13 @@ public class GrenadeController : MonoBehaviour
       _player = GetComponent<PlayerController>();
    }
    
-   private void FixedUpdate()
-   {
-      ThrowGrenade();
-   }
-
-   private void ThrowGrenade()
+   public void ThrowGrenade()
    {
       if (_player.ReadyInput)
       {
          SpwanGrenade();
          MoveGrenade();
-         Debug.Log("GrenadeController: 수류탄 투척!");
+         Debug.Log("GrenadeController: 수류탄 던지기 실행중!");
       }
    }
 
