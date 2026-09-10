@@ -413,6 +413,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 313994613765401177, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
+      propertyPath: _grenade
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1371580618348951101, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
       propertyPath: _steampack
       value: 

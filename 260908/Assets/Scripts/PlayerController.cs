@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour, IInteractor
     [SerializeField] private KeyCode _interactionKey = KeyCode.E;
     [SerializeField] private int _maxHp;
     [SerializeField] private GrenadeController _grenade;
+    [SerializeField] private Transform _grenadeSpwanPoint;
+    
     private PlayerMovement _movement;
     private PlayerWeapon _weapon;
     private Transform _cameraTransform;
@@ -20,7 +22,9 @@ public class PlayerController : MonoBehaviour, IInteractor
     
     public GameObject GameObject { get => gameObject; }
     public int CurrentHp { get; set; }
-    
+
+    public Transform GrenadeSpwanPoint => _grenadeSpwanPoint;
+
     private float _keydownTimer;
     private bool _isPressedKey => Input.GetKey(KeyCode.Alpha3);
     private bool _isKeyup => Input.GetKeyUp(KeyCode.Alpha3);
@@ -148,6 +152,7 @@ public class PlayerController : MonoBehaviour, IInteractor
             {
                 Debug.Log("GrenadeController: 수류탄 발사!");
                 _keydownTimer = 0;
+                _grenade.ThrowGrenade();
             }
             else
             {

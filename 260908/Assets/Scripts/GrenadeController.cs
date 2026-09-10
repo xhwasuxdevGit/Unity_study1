@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class GrenadeController : MonoBehaviour
 {
-   [SerializeField] private Transform _grenadeSpwanPoint;
+   
    [SerializeField] private float _explosionDelay;
    [SerializeField] private GameObject _explosionEffect;
-   [SerializeField] private PlayerController _player;
+   [SerializeField] private GameObject _grenadePrefab;
+   [SerializeField] private Transform _grenadeSpwanPoint;
+   
    private Rigidbody _rigidbody;
    private float _throwUpForce = 15.0f; 
    private float _thrwoForwardForce = 10.0f; 
    private Vector3 _throwDirection;
-   
+   private PlayerController _playerController;
 
    private void Awake()
    {
@@ -27,18 +29,14 @@ public class GrenadeController : MonoBehaviour
 
    private void CacheCompoments()
    {
-      _rigidbody = GetComponent<Rigidbody>();
-      _player = GetComponent<PlayerController>();
+      _rigidbody = _grenadePrefab.GetComponent<Rigidbody>();
    }
    
    public void ThrowGrenade()
    {
-      if (_player.ReadyInput)
-      {
-         SpwanGrenade();
-         MoveGrenade();
-         Debug.Log("GrenadeController: 수류탄 던지기 실행중!");
-      }
+      SpwanGrenade();
+      MoveGrenade();
+      Debug.Log("GrenadeController: 수류탄 던지기 실행중!");
    }
 
    private void MoveGrenade()
@@ -54,7 +52,7 @@ public class GrenadeController : MonoBehaviour
    private void SpwanGrenade()
    {
          Instantiate(gameObject,
-         _grenadeSpwanPoint.transform.position,
+         _grenadeSpwanPoint.position,
          _grenadeSpwanPoint.transform.rotation);
       Debug.Log("수류탄 생성!");   
    }
