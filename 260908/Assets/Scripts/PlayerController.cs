@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour, IInteractor
     [SerializeField] private float _detectionRange;
     [SerializeField] private KeyCode _interactionKey = KeyCode.E;
     [SerializeField] private int _maxHp;
-    [SerializeField] private GrenadeController _grenade;
     [SerializeField] private Transform _grenadeSpwanPoint;
+    [SerializeField] private float _grenadeChargeTime;
     
     private PlayerMovement _movement;
     private PlayerWeapon _weapon;
@@ -23,14 +23,18 @@ public class PlayerController : MonoBehaviour, IInteractor
     public GameObject GameObject { get => gameObject; }
     public int CurrentHp { get; set; }
 
-    public Transform GrenadeSpwanPoint => _grenadeSpwanPoint;
-
+    
+    
+    
+    // 수류탄
+    private GrenadeController _grenade;
     private float _keydownTimer;
     private bool _isPressedKey => Input.GetKey(KeyCode.Alpha3);
     private bool _isKeyup => Input.GetKeyUp(KeyCode.Alpha3);
-    private bool _chargeKey => _keydownTimer > 1.0f;
-    private bool _readyInput => _isKeyup && _chargeKey;
-    public bool ReadyInput => _readyInput;
+    private bool _EnoughCharge => _keydownTimer >= _grenadeChargeTime;
+    private bool _readyInput => _EnoughCharge && _isKeyup ;
+   
+    
 
     //-------------------------------------------------------
     private void Awake()
@@ -47,17 +51,21 @@ public class PlayerController : MonoBehaviour, IInteractor
     private void FixedUpdate()
     {
         _movement.Move();
-        _grenade.ThrowGrenade();
     }
 
     private void Update()
     {
+        if (!GameManager.Instance.IsGameRunning) return;
+        
         _movement.Rotate();
         _weapon.Fire();
         _weapon.AmmoReload();
         DetectInteractable();
         TryInteract();
         ReadyGrenade();
+        
+        if(Input.GetKeyDown(KeyCode.P)) GameManager.Instance.Pause();
+        else if (Input.GetKeyDown(KeyCode.O)) GameManager.Instance.Run();
     }
 
     private void LateUpdate()
@@ -72,6 +80,7 @@ public class PlayerController : MonoBehaviour, IInteractor
         _movement = GetComponent<PlayerMovement>();
         _weapon = GetComponentInChildren<PlayerWeapon>();
         _cameraTransform = Camera.main.transform;
+        _grenade =  GetComponentInChildren<GrenadeController>();
         CurrentHp = _maxHp;
 
     }
@@ -141,23 +150,18 @@ public class PlayerController : MonoBehaviour, IInteractor
 
     public void ReadyGrenade()
     {
-        if(!_isPressedKey) return;
-        
         if (_isPressedKey)
         {
             _keydownTimer += Time.deltaTime;
             Debug.Log("GrenadeController: 수류탄 장전중!");
-
-            if (_readyInput)
-            {
-                Debug.Log("GrenadeController: 수류탄 발사!");
-                _keydownTimer = 0;
-                _grenade.ThrowGrenade();
-            }
-            else
-            {
-                Debug.Log("GrenadeController: 수류탄 장전완료");
-            }
         }
+        
+        if (_readyInput)
+        {
+            Debug.Log("GrenadeController: 수류탄 발사!");
+            _keydownTimer = 0;
+            _grenade.ThrowGrenade();
+        }
+        
     }
 }

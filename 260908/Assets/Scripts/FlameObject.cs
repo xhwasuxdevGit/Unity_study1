@@ -25,7 +25,6 @@ public class FlameObject : MonoBehaviour
     {
         Updateelapsed();
         UnPlay();
-        
     }
     
     private void SetElapseDefault()

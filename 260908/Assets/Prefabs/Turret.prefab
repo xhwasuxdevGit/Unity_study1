@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4bafa1b2fb1dc42b55bc476922dfe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletpool: {fileID: 0}
   _rotateSpeed: 70
   _cooldown: 1
   _headTransform: {fileID: 1322256861453506567}

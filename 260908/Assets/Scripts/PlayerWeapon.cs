@@ -128,6 +128,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (!_isPressdReload) return;
         {
+            
             Debug.Log("PlayerWeapon: 재장전 중");
             _currentAmmo = _maxAmmo;
         }

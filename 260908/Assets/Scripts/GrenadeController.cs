@@ -6,44 +6,49 @@ using UnityEngine;
 public class GrenadeController : MonoBehaviour
 {
    
+   // 수류탄 자체를 플레이어에 붙이고 붙어있는 수류탄 프리팹의 폭발 애니메이션을 재생해야함
+   // 지금은 던져진 수류탄이 아니라 플레이어 붙어있는 폭발 애니메이션이 재생되고 있음
    [SerializeField] private float _explosionDelay;
-   [SerializeField] private GameObject _explosionEffect;
    [SerializeField] private GameObject _grenadePrefab;
    [SerializeField] private Transform _grenadeSpwanPoint;
-   
    private Rigidbody _rigidbody;
-   private float _throwUpForce = 15.0f; 
-   private float _thrwoForwardForce = 10.0f; 
+   private float _throwupForce = 20.0f;
+   private float _throwForwardForce = 30.0f; 
    private Vector3 _throwDirection;
-   private PlayerController _playerController;
+   private GameObject _grenadeInstance;
+   private float _timer;
+   private ExplosionObject _explosionObject;
 
    private void Awake()
    {
-      CacheCompoments();
+   
+   }
+   private void Update()
+   {
+      TimeCount();
    }
 
-   private void OnDestroy()
+   private void TimeCount()
    {
-      Explode();
-   }
-
-   private void CacheCompoments()
-   {
-      _rigidbody = _grenadePrefab.GetComponent<Rigidbody>();
+      _timer += Time.deltaTime;
    }
    
    public void ThrowGrenade()
    {
+      Debug.Log("GrenadeController: 수류탄 투척!!");
       SpwanGrenade();
       MoveGrenade();
-      Debug.Log("GrenadeController: 수류탄 던지기 실행중!");
+      
    }
 
    private void MoveGrenade()
    {
      Debug.Log("수류탄 움직이는 중");
-      _rigidbody.isKinematic = false;
-      _throwDirection = (Vector3.forward * _thrwoForwardForce) + (Vector3.up * _throwUpForce); 
+     
+     _throwDirection = 
+        (_grenadeInstance.transform.forward * _throwForwardForce) 
+        + (_grenadeInstance.transform.up * _throwupForce) ;
+     
       _rigidbody.AddForce(_throwDirection);
       SetTimer();
    
@@ -51,23 +56,24 @@ public class GrenadeController : MonoBehaviour
 
    private void SpwanGrenade()
    {
-         Instantiate(gameObject,
+      _grenadeInstance = Instantiate(_grenadePrefab,
          _grenadeSpwanPoint.position,
          _grenadeSpwanPoint.transform.rotation);
+      _rigidbody = _grenadeInstance.GetComponent<Rigidbody>();
+      _explosionObject = _grenadeInstance.GetComponentInChildren<ExplosionObject>();
+      
       Debug.Log("수류탄 생성!");   
    }
 
    private void SetTimer()
    {
-      Destroy(gameObject, _explosionDelay);
+     if( _grenadeInstance == null) return;
+     
+      if (_timer >= _explosionDelay )
+      {
+         _explosionObject.gameObject.SetActive(true);
+         Destroy(_grenadeInstance, _explosionDelay);
+      }
    }
-
-   private void Explode()
-   {
-      // 폭발 애니메이션 적용
-      // 인터페이스 활용해서 데미지 입히기
-   }
-
-
-
+   
 }
