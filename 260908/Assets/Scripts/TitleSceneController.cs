@@ -21,7 +21,7 @@ public class TitleSceneController : MonoBehaviour
         _startButton.onClick.RemoveListener(LoadGameScene);
     }
 
-    public void LoadGameScene()
+    private void LoadGameScene()
     {
         SceneManager.LoadScene(1);
     }

@@ -19,6 +19,8 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private FlameObject _flameEffect;
     
     public float AttackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
+    public int CurrrentAmmo => _currentAmmo;
+    public int MaxAmmo => _maxAmmo;
     
     private float _currentCooldown;
     private int _currentAmmo;
