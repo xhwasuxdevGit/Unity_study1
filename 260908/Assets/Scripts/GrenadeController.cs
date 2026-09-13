@@ -5,75 +5,69 @@ using UnityEngine;
 
 public class GrenadeController : MonoBehaviour
 {
-   
-   // 수류탄 자체를 플레이어에 붙이고 붙어있는 수류탄 프리팹의 폭발 애니메이션을 재생해야함
-   // 지금은 던져진 수류탄이 아니라 플레이어 붙어있는 폭발 애니메이션이 재생되고 있음
-   [SerializeField] private float _explosionDelay;
+   [SerializeField] private float _grenadeChargeTime;
    [SerializeField] private GameObject _grenadePrefab;
    [SerializeField] private Transform _grenadeSpwanPoint;
    private Rigidbody _rigidbody;
-   private float _throwupForce = 20.0f;
-   private float _throwForwardForce = 30.0f; 
+   private float _throwupForce = 3;
+   private float _throwForwardForce = 20.0f; 
    private Vector3 _throwDirection;
-   private GameObject _grenadeInstance;
-   private float _timer;
-   private ExplosionObject _explosionObject;
-
-   private void Awake()
-   {
    
-   }
+   private float _keydownTimer;
+   private bool _isPressedKey => Input.GetKey(KeyCode.Alpha3);
+   private bool _isKeyup => Input.GetKeyUp(KeyCode.Alpha3);
+   private bool _enoughCharge => _keydownTimer >= _grenadeChargeTime;
+   
+
+
    private void Update()
    {
-      TimeCount();
+      ReadInput();
    }
 
-   private void TimeCount()
+   private void ReadInput()
    {
-      _timer += Time.deltaTime;
+      if (_isPressedKey)
+      {
+         Debug.Log("수류탄 충전중");
+         _keydownTimer += Time.deltaTime;
+      }
+
+      if (_isKeyup)
+      {
+         if (_enoughCharge)
+         {
+            ThrowGrenade();
+         }
+      }
    }
    
    public void ThrowGrenade()
    {
-      Debug.Log("GrenadeController: 수류탄 투척!!");
-      SpwanGrenade();
-      MoveGrenade();
-      
-   }
 
-   private void MoveGrenade()
-   {
-     Debug.Log("수류탄 움직이는 중");
+      GameObject _grenadeInstance = Instantiate(
+         _grenadePrefab,
+         _grenadeSpwanPoint.position, 
+         _grenadeSpwanPoint.rotation
+      );
+
+      Debug.Log("수류탄 생성!"); 
+      
+      _rigidbody = _grenadeInstance.GetComponent<Rigidbody>();
+      
+      if (_rigidbody == null) 
+      {
+         Debug.LogWarning("생성된 수류탄에 Rigidbody 컴포넌트가 없습니다!");
+         return;
+      }
      
-     _throwDirection = 
-        (_grenadeInstance.transform.forward * _throwForwardForce) 
-        + (_grenadeInstance.transform.up * _throwupForce) ;
+      _throwDirection = 
+         (_grenadeInstance.transform.forward * _throwForwardForce) 
+         + (_grenadeInstance.transform.up * _throwupForce);
      
       _rigidbody.AddForce(_throwDirection);
-      SetTimer();
+      Debug.Log("수류탄 던지는 중");
+   }
    
-   }
-
-   private void SpwanGrenade()
-   {
-      _grenadeInstance = Instantiate(_grenadePrefab,
-         _grenadeSpwanPoint.position,
-         _grenadeSpwanPoint.transform.rotation);
-      _rigidbody = _grenadeInstance.GetComponent<Rigidbody>();
-      _explosionObject = _grenadeInstance.GetComponentInChildren<ExplosionObject>();
-      
-      Debug.Log("수류탄 생성!");   
-   }
-
-   private void SetTimer()
-   {
-     if( _grenadeInstance == null) return;
-     
-      if (_timer >= _explosionDelay )
-      {
-         _explosionObject.gameObject.SetActive(true);
-         Destroy(_grenadeInstance, _explosionDelay);
-      }
-   }
    
 }
