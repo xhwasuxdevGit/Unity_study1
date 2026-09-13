@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StaticPracticeA.unity
+    guid: a2f5b621be15aef4297738fa82b00248
+  - enabled: 1
+    path: Assets/Scenes/StaticPracticeB.unity
+    guid: 3a69104450e5eef409fa2a20abed94a9
   m_configObjects: {}
