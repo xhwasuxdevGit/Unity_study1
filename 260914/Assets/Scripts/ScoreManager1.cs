@@ -1,22 +1,15 @@
-using System;  
+using System; 
 using UnityEngine;
 using UnityEngine.Events;
 
-[Serializable]
-public class IntEvent : UnityEvent<int>
-{
-    
-}
 
-public class ScoreManager : MonoBehaviour  
+public class ScoreManager1 : MonoBehaviour  
 {  
-    [SerializeField] private IntEvent _onScoreChanged;
     private int _score;
 
-    public static ScoreManager Instance { get; private set; }
-    public IntEvent OnScoreChanged => _onScoreChanged;
+    public static ScoreManager1 Instance { get; private set; }
 
-    // public event Action<int> OnScoreChanged;
+    public event Action<int> OnScoreChanged;
 
     private void Awake()  
     {  

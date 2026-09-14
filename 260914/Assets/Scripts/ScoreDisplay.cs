@@ -12,18 +12,17 @@ public class ScoreDisplay : MonoBehaviour
       UnBindScoreEvents();
    }
 
-   private void BindScoreEvents()  
+   private void BindScoreEvents()
    {  
-      ScoreManager.Instance.OnScoreChanged += OnScoreChanged;
-     
+      ScoreManager.Instance.OnScoreChanged.AddListener(OnScoreChanged);
    }
 
    private void UnBindScoreEvents()
    {
-      ScoreManager.Instance.OnScoreChanged -= OnScoreChanged;
+      ScoreManager.Instance.OnScoreChanged.RemoveListener(OnScoreChanged);
    }
 
-   private void OnScoreChanged(int score)  
+   public void OnScoreChanged(int score)  
    {  
       Debug.Log($"ScoreDisplay: score is {score}");  
    }  
