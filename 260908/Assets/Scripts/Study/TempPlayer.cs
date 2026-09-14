@@ -28,10 +28,6 @@ public class TempPlayer : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha3)) Exp.Value += 20.5f;
     }
 
-    private void OnDestroy()
-    {
-        
-    }
     
     public void TakeDamage(int damage)
     {

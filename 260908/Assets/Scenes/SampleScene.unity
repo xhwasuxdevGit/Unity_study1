@@ -475,6 +475,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &846065134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 846065136}
+  - component: {fileID: 846065135}
+  m_Layer: 0
+  m_Name: NullFinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &846065135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846065134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23dcf5b758473b469e71688d50402bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &846065136
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846065134}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &856593750
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +741,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6929420797968792741, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
+      propertyPath: _weapon
+      value: 
+      objectReference: {fileID: 1393377667}
+    - target: {fileID: 6929420797968792741, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
       propertyPath: _magazine
       value: 
       objectReference: {fileID: 856593752}
@@ -748,8 +796,7 @@ PrefabInstance:
       propertyPath: _grenadeChargeTime
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 9170735393350991614, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 980376380476281610, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
     m_AddedGameObjects:
@@ -760,7 +807,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1437445139622539066, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1534380189}
+    - targetCorrespondingSourceObject: {fileID: 1437445139622539066, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1534380194}
   m_SourcePrefab: {fileID: 100100000, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
+--- !u!114 &931728533 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6929420797968792741, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
+  m_PrefabInstance: {fileID: 931728532}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075968587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c556f080216b7949b67321875ee1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &937180729
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,6 +1020,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce33a7ba5131b646b311d48b47c79df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1393377667 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9160338628630739991, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
+  m_PrefabInstance: {fileID: 931728532}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6784437691ef4e143a175145f64a5df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1448347744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,6 +1114,20 @@ MonoBehaviour:
   _grenadeChargeTime: 1
   _grenadePrefab: {fileID: 1070458637840847399, guid: c6c79ecae34042f458773ff7989676e1, type: 3}
   _grenadeSpwanPoint: {fileID: 944363269}
+--- !u!114 &1534380194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075968587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92994c981ac57774aba2a06ae1edc537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerWeapon: {fileID: 1393377667}
+  _playerUIController: {fileID: 931728533}
 --- !u!1001 &1595497394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1370,3 +1456,4 @@ SceneRoots:
   - {fileID: 937180733}
   - {fileID: 1448347747}
   - {fileID: 367409374}
+  - {fileID: 846065136}

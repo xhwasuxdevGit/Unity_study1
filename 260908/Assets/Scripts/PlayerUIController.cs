@@ -7,26 +7,11 @@ using UnityEngine.UI;
 public class PlayerUIController : MonoBehaviour
 {
    [SerializeField] private TextMeshProUGUI _magazine;
-   private PlayerWeapon _weapon;
-
-   private void Awake()
-   {
-      CacheComponents();
-   }
-
-   private void Update()
-   {
-      RefreshMagazineUI();
-   }
+   [SerializeField] private PlayerWeapon _weapon;
    
-   private void CacheComponents()
+   public void RefreshMagazineUI(int currentAmmo)
    {
-      _weapon = GetComponentInChildren<PlayerWeapon>();
-   }
-   
-   public void RefreshMagazineUI()
-   {
-      _magazine.text = $"{_weapon.CurrrentAmmo} / {_weapon.MaxAmmo}";
+      _magazine.text = $"{currentAmmo} / {_weapon.MaxAmmo}";
    }
 }
 

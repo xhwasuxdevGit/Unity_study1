@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 1356765644469340273}
   - component: {fileID: 313994613765401177}
   - component: {fileID: 3828416799515352350}
-  - component: {fileID: 9170735393350991614}
   - component: {fileID: 6929420797968792741}
   m_Layer: 7
   m_Name: Player
@@ -230,8 +229,6 @@ MonoBehaviour:
   _detectionRange: 4
   _interactionKey: 101
   _maxHp: 50
-  _grenadeSpwanPoint: {fileID: 7318282247689145980}
-  _grenadeChargeTime: 2
 --- !u!114 &3828416799515352350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,21 +246,6 @@ MonoBehaviour:
   _mouseSensitivity: 2
   _minPitch: -60
   _maxPitch: 60
---- !u!114 &9170735393350991614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437445139622539066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94949db595ae5944bbac235b1d42ea34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _explosionDelay: 2
-  _grenadePrefab: {fileID: 1070458637840847399, guid: c6c79ecae34042f458773ff7989676e1, type: 3}
-  _grenadeSpwanPoint: {fileID: 7318282247689145980}
 --- !u!114 &6929420797968792741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _magazine: {fileID: 0}
+  _weapon: {fileID: 0}
 --- !u!1 &2502131095148367257
 GameObject:
   m_ObjectHideFlags: 0
