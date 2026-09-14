@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _explosionDelay: 2
   _explosionPrefab: {fileID: 8441217538452442355, guid: 99f60ff05286f6c40b5fc2b66f299fe9, type: 3}
+  _damage: 40
 --- !u!1001 &412024807875507679
 PrefabInstance:
   m_ObjectHideFlags: 0

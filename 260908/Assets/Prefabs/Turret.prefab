@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7924847939429267291}
   - component: {fileID: 6209404794149102808}
   - component: {fileID: 3243996029984028655}
+  - component: {fileID: 5493370146509562472}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -73,10 +74,26 @@ MonoBehaviour:
   _cooldown: 1
   _headTransform: {fileID: 1322256861453506567}
   _muzzlePoint: {fileID: 2309520521195993249}
+  _maxTurretHp: 40
+  _destroyEffectPrefab: {fileID: 4329139670608839491, guid: 8e428a72227463d42a31a0776025c08b, type: 3}
   _bulletPrefab: {fileID: 9201348482844826806, guid: 5f095fa4a54029549ae645821ddf1605, type: 3}
   _bulletDamage: 10
   _bulletSpeed: 4
-  _bulletDestoryDelay: 5
+  _returnToDelay: 1
+--- !u!114 &5493370146509562472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993166987059011783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 960cfed97ebe0664c913b256ebad6d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _turret: {fileID: 3243996029984028655}
+  _turretHpUI: {fileID: 0}
 --- !u!1 &1806586874164282045
 GameObject:
   m_ObjectHideFlags: 0

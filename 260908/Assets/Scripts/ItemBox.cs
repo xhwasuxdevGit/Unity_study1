@@ -30,17 +30,6 @@ public class ItemBox : MonoBehaviour, IInteractable
     
     public void Interact(IInteractor owner)
     {
-        // 상호작용할 거리 - owner의 능력치를 상승
-        // 인벤토리로 획득
-        // 무기 추가
-        // 장탄수 추가
-
-        /*if (!(owner is PlayerController)) return;
-        PlayerController player = (PlayerController)owner;*/
-        
-        // 이동속도 변환 ()
-        
-        
         Destroy(gameObject);
     }
 

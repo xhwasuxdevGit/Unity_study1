@@ -142,7 +142,7 @@ public class PlayerWeapon : MonoBehaviour
         {
             
             Debug.Log("PlayerWeapon: 재장전 중");
-            _currentAmmo = _maxAmmo;
+            CurrrentAmmo = _maxAmmo;
         }
         
     }

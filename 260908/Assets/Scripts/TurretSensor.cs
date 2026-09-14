@@ -73,7 +73,6 @@ public class TurretSensor : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, _sphereCollider.radius, _targetLayer))
         {
-            Debug.Log("플레이어 감지됨");
             _isPlayerInsight = true;
         }
         

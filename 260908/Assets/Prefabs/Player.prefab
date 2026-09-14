@@ -92,37 +92,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286408612818369646}
   m_Enabled: 1
---- !u!1 &980376380476281610
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7318282247689145980}
-  m_Layer: 0
-  m_Name: GrenadeSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7318282247689145980
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980376380476281610}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.463, y: 1.504, z: 1.41}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8984058284873480504}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1437445139622539066
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +106,8 @@ GameObject:
   - component: {fileID: 313994613765401177}
   - component: {fileID: 3828416799515352350}
   - component: {fileID: 6929420797968792741}
+  - component: {fileID: 8036923630579295114}
+  - component: {fileID: 8107677551887900849}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -160,7 +131,6 @@ Transform:
   - {fileID: 92382670364569686}
   - {fileID: 8734869553057068733}
   - {fileID: 6929788974538801732}
-  - {fileID: 7318282247689145980}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1340823987346756806
@@ -259,7 +229,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _magazine: {fileID: 0}
-  _weapon: {fileID: 0}
+  _weapon: {fileID: 9160338628630739991}
+--- !u!114 &8036923630579295114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437445139622539066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94949db595ae5944bbac235b1d42ea34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _grenadeChargeTime: 1
+  _grenadePrefab: {fileID: 1070458637840847399, guid: c6c79ecae34042f458773ff7989676e1, type: 3}
+  _grenadeSpwanPoint: {fileID: 92382670364569686}
+--- !u!114 &8107677551887900849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437445139622539066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92994c981ac57774aba2a06ae1edc537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerWeapon: {fileID: 9160338628630739991}
+  _playerUIController: {fileID: 6929420797968792741}
 --- !u!1 &2502131095148367257
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +307,7 @@ MonoBehaviour:
   _fireKey: 323
   _reloadKey: 114
   _range: 2
-  _damage: 10
+  _damage: 5
   _attackCooldown: 0.3
   _maxAmmo: 30
   SteampackDuration: 0
@@ -847,6 +846,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 930961686619717178}
+  - {fileID: 1536059693409369684}
   m_Father: {fileID: 8984058284873480504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6233756952207705190
@@ -895,6 +895,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 10
   _steampack: {fileID: 0}
+--- !u!1 &6418797952563268961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1536059693409369684}
+  m_Layer: 0
+  m_Name: GrenadeSpwan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1536059693409369684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6418797952563268961}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.282, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 92382670364569686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8286639060150804229
 GameObject:
   m_ObjectHideFlags: 0

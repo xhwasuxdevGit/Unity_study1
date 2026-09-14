@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour, IInteractor
     private void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = true;
     }
 
     private void SetWeaponTransform()
@@ -90,10 +90,6 @@ public class PlayerController : MonoBehaviour, IInteractor
         _cameraTransform.SetPositionAndRotation(
             _cameraPivot.position, 
             _cameraPivot.rotation);
-        
-        //  위와 동일한 내용 구현
-        // _cameraTransform.position = _cameraPivot.position;
-        // _cameraTransform.rotation = _cameraPivot.rotation;
     }
 
     public void DetectInteractable()
