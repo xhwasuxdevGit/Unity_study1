@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerWeapon : MonoBehaviour
 {
@@ -18,12 +19,23 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private int SteampackDuration;
     [SerializeField] private FlameObject _flameEffect;
     
-    public float AttackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
-    public int CurrrentAmmo => _currentAmmo;
-    public int MaxAmmo => _maxAmmo;
-    
     private float _currentCooldown;
     private int _currentAmmo;
+    public event Action<int> OnAmmoChanged;
+    public float AttackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
+
+    public int CurrrentAmmo
+    {
+        get => _currentAmmo;
+        private set
+        {
+            _currentAmmo = value;
+            OnAmmoChanged?.Invoke(_currentAmmo);
+          
+        }
+    }
+    public int MaxAmmo => _maxAmmo;
+    
     private bool _isPressedFire => Input.GetKey(_fireKey);
     private bool _isPressdReload => Input.GetKeyDown(_reloadKey);
     private bool _isReadyToAttack
@@ -66,7 +78,7 @@ public class PlayerWeapon : MonoBehaviour
     private void SetDefault()
     {
         _currentCooldown = 0f;
-        _currentAmmo = _maxAmmo;
+        CurrrentAmmo = _maxAmmo;
     }
     
     
@@ -74,16 +86,14 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (!_canFire) return;
         
-        _currentAmmo--;
+        CurrrentAmmo--;
         _currentCooldown = 0f;
         PlayFlameobject();
         
         if (!TryGetDamageable(out IDamageable damageable)) return;
         
         damageable.TakeDamage(_damage);
-        
         Debug.Log($"PlayweWeapon: {damageable.GameObject.name}에게 발사");
-        Debug.Log($"PlayerWeapon: 남은 총알: {_currentAmmo}");
         
     }
 

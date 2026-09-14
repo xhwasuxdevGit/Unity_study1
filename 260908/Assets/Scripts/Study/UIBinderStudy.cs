@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerUIBinder : MonoBehaviour
+public class UIBinderStudy : MonoBehaviour
 {
     private TempPlayer _player;
     [SerializeField] private TempPlayerUI _playerUI;
