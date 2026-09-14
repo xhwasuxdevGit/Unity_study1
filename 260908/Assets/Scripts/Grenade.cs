@@ -7,6 +7,7 @@ public class Grenade : MonoBehaviour
     [SerializeField] private float _explosionDelay;
     [SerializeField] private GameObject _explosionPrefab;
     private float _timer;
+    private GameObject _explosion;
 
     
     private void Update()
@@ -28,10 +29,13 @@ public class Grenade : MonoBehaviour
         
         if(_timer >= _explosionDelay )
         {
-            Instantiate(_explosionPrefab, transform.position, transform.rotation);
+            _explosion = Instantiate(_explosionPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
+            Destroy(_explosion, 2.5f);
+            
         }
-       
+        
+      
     }
     
     
