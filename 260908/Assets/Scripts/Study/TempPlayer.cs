@@ -6,9 +6,6 @@ using UnityEngine.Events;
 
 public class TempPlayer : MonoBehaviour
 {
-    // IntChange: 반환형이 없고, 매개변수로 int타입 1개를 받는 함수자료형을 선언
-   
-    
     private int _health;
 
     public int Health
