@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour, IInteractor
         
         _movement.Rotate();
         _weapon.Fire();
-        _weapon.AmmoReload();
+        _weapon.Reload();
         DetectInteractable();
         TryInteract();
         

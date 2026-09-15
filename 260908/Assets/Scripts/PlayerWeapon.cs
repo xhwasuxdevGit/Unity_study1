@@ -5,9 +5,6 @@ using System;
 
 public class PlayerWeapon : MonoBehaviour
 {
-  
-    // Raycast -> IDamageable
-
     private Transform _cameraTransform;
     
     [SerializeField] private KeyCode _fireKey = KeyCode.Mouse0;
@@ -16,8 +13,10 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private float _attackCooldown;
     [SerializeField] private int _maxAmmo;
+    [SerializeField] private float _reloadDelay;
     [SerializeField] private int SteampackDuration;
     [SerializeField] private FlameObject _flameEffect;
+    
     
     private float _currentCooldown;
     private int _currentAmmo;
@@ -46,8 +45,10 @@ public class PlayerWeapon : MonoBehaviour
     {
        get { return _currentAmmo > 0; }
     }
+    private bool _isReloading;
 
-    private bool _canFire => _isPressedFire && _isReadyToAttack && _isEnoughAmmo;
+    private bool _canFire => _isPressedFire 
+                             && _isReadyToAttack && _isEnoughAmmo && !_isReloading;
     
     
     //----------------------------------------------------------------------
@@ -136,14 +137,26 @@ public class PlayerWeapon : MonoBehaviour
         _currentCooldown += Time.deltaTime;
     }
 
-    public void AmmoReload()
+    public void Reload()
     {
-        if (!_isPressdReload) return;
+        if(_isReloading) return;
+        
+        if(!_isPressdReload) return;
+        
+        if (_isPressdReload)
         {
-            
+            StartCoroutine(ReloadRoutine());  
+        }
+        
+    }
+    
+    public IEnumerator ReloadRoutine()
+    {
+            _isReloading = true;
+            yield return new WaitForSeconds(_reloadDelay);
             Debug.Log("PlayerWeapon: 재장전 중");
             CurrrentAmmo = _maxAmmo;
-        }
+            _isReloading = false;
         
     }
 
