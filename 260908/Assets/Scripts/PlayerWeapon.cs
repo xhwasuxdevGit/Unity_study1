@@ -157,9 +157,7 @@ public class PlayerWeapon : MonoBehaviour
             Debug.Log("PlayerWeapon: 재장전 중");
             CurrrentAmmo = _maxAmmo;
             _isReloading = false;
-        
     }
-
-
+    
     
 }
