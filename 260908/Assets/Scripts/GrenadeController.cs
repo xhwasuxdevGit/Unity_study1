@@ -25,12 +25,16 @@ public class GrenadeController : MonoBehaviour
    }
 
    private float _throwupForce = 10;
-   private float _throwForwardForce = 25.0f; 
+   private float _throwForwardForce = 20; 
    private float _keydownTimer;
    private int _grenadeCouter;
+   private Coroutine _inputCoroutine;
 
-   private bool _isPressedKey => Input.GetKey(KeyCode.Alpha3);
-   private bool _isKeyup => Input.GetKeyUp(KeyCode.Alpha3);
+   private bool _isPressedKey => Input.GetKeyDown(KeyCode.Alpha3);
+   private bool _isKeyUp => Input.GetKeyUp(KeyCode.Alpha3);
+   private bool _isGrenadeEnough => GrenadeCounter > 0;
+   private bool _isInputReady;
+   
    //----------------------------------------------
    private void Start()
    {
@@ -45,27 +49,29 @@ public class GrenadeController : MonoBehaviour
 
    private void ReadInput()
    {
- 
-     StartCoroutine(InputkeyRoutine());
+      if (_isPressedKey && !_isInputReady && _isGrenadeEnough)
+      {
+         StartCoroutine(KeyChargeRoutine());
+      }
+      
    }
 
-   public IEnumerator InputkeyRoutine()
+   public IEnumerator KeyChargeRoutine()
    {
-      if (_isPressedKey)
+      _isInputReady = true;
+      yield return new WaitForSeconds(_keyChargeTime);
+      if (_isKeyUp)
       {
-         yield return new WaitForSeconds(_keyChargeTime);
-         if (_isKeyup)
-         {
-            ThrowGrenade();
-         }
+         ThrowGrenade();
       }
+      
+      _isInputReady = false;
    }
    
    public void ThrowGrenade()
    {
+      if (!_isGrenadeEnough) return;
       GrenadeCounter--;
-      if (GrenadeCounter <= 0) return;
-      
       GameObject _grenadeInstance = Instantiate(_grenadePrefab,
          _grenadeSpwanPoint.position, _grenadeSpwanPoint.rotation);
       

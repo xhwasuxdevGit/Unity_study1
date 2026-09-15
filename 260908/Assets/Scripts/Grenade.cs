@@ -9,13 +9,8 @@ public class Grenade : MonoBehaviour
     [SerializeField] private int _damage;
     private float _timer;
     private bool _isTimerOn;
-
-    private void Start()
-    {
-        _isTimerOn = false;
-    }
     
-    private void Update()
+    private void OnEnable()
     {
         CountTimer();
     }
