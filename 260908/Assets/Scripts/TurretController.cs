@@ -120,7 +120,7 @@ public class TurretController : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         TurretHP -= damage;
-        Debug.Log($"{gameObject.name}가 데미지 입음 [HP: {TurretHP} / {MaxTurretHP}]" );
+        Debug.Log($"{gameObject.name}가 데미지 입음 [HP:  {TurretHP} / {MaxTurretHP}]" );
     }
 
     private void BeDestroyed()

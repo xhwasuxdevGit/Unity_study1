@@ -763,6 +763,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6934218704471785391, guid: b75b317e4a8373d498b9b95b158cb70e, type: 3}
+      propertyPath: _duration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934218704471785391, guid: b75b317e4a8373d498b9b95b158cb70e, type: 3}
       propertyPath: _steampack
       value: 
       objectReference: {fileID: 1506362402}
