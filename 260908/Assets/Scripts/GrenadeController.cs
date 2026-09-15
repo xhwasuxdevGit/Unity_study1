@@ -5,20 +5,39 @@ using UnityEngine;
 
 public class GrenadeController : MonoBehaviour
 {
-   [SerializeField] private float _grenadeChargeTime;
    [SerializeField] private GameObject _grenadePrefab;
    [SerializeField] private Transform _grenadeSpwanPoint;
-   private Rigidbody _rigidbody;
-   private float _throwupForce = 3;
-   private float _throwForwardForce = 20.0f; 
-   private Vector3 _throwDirection;
    
+   [SerializeField] private float _grenadeChargeTime;
+   [SerializeField] private int _maxGrenadeCount;
+
+   public event Action<int> OnGrenadeCountChanged;
+   
+   public int GrenadeCounter
+   {
+      get => _grenadeCouter;
+
+      private set
+      {
+         _grenadeCouter = value;
+         OnGrenadeCountChanged?.Invoke(_grenadeCouter);
+         
+      }
+   }
+
+   private float _throwupForce = 10;
+   private float _throwForwardForce = 25.0f; 
    private float _keydownTimer;
+   private int _grenadeCouter;
+   
    private bool _isPressedKey => Input.GetKey(KeyCode.Alpha3);
    private bool _isKeyup => Input.GetKeyUp(KeyCode.Alpha3);
    private bool _enoughCharge => _keydownTimer >= _grenadeChargeTime;
-   
 
+   private void Start()
+   {
+      GrenadeCounter = _maxGrenadeCount;
+   }
 
    private void Update()
    {
@@ -29,7 +48,6 @@ public class GrenadeController : MonoBehaviour
    {
       if (_isPressedKey)
       {
-         Debug.Log("수류탄 충전중");
          _keydownTimer += Time.deltaTime;
       }
 
@@ -44,29 +62,31 @@ public class GrenadeController : MonoBehaviour
    
    public void ThrowGrenade()
    {
+      GrenadeCounter--;
 
+      if (GrenadeCounter <= 0)
+      {
+         Debug.Log("GrenadeController: 남은 수류탄이 없습니다");
+         return;
+      }
+      
+      
       GameObject _grenadeInstance = Instantiate(
          _grenadePrefab,
          _grenadeSpwanPoint.position, 
          _grenadeSpwanPoint.rotation
       );
-
-      Debug.Log("수류탄 생성!"); 
       
-      _rigidbody = _grenadeInstance.GetComponent<Rigidbody>();
+      Rigidbody _rigidbody = _grenadeInstance.GetComponent<Rigidbody>();
       
-      if (_rigidbody == null) 
-      {
-         Debug.LogWarning("생성된 수류탄에 Rigidbody 컴포넌트가 없습니다!");
-         return;
-      }
+      if (_rigidbody == null) return;
      
-      _throwDirection = 
+      Vector3 _throwDirection = 
          (_grenadeInstance.transform.forward * _throwForwardForce) 
          + (_grenadeInstance.transform.up * _throwupForce);
      
       _rigidbody.AddForce(_throwDirection);
-      Debug.Log("수류탄 던지는 중");
+    
    }
    
    

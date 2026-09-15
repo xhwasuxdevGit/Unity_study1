@@ -7,6 +7,7 @@ public class PlayerUIBinder : MonoBehaviour
 {
    [SerializeField] private PlayerWeapon _playerWeapon;
    [SerializeField] private PlayerUIController _playerUIController;
+   [SerializeField] private GrenadeController _grenade;
    
    private void OnEnable()
    {
@@ -22,10 +23,12 @@ public class PlayerUIBinder : MonoBehaviour
    private void BindPlayerUIChangeEvents()
    {
       _playerWeapon.OnAmmoChanged += _playerUIController.RefreshMagazineUI;
+      _grenade.OnGrenadeCountChanged += _playerUIController.UpdateGrenadeUI;
    }
 
    private void UnBindPlayerUIChangeEvents()
    {
       _playerWeapon.OnAmmoChanged -= _playerUIController.RefreshMagazineUI;
+      _grenade.OnGrenadeCountChanged -= _playerUIController.UpdateGrenadeUI;
    }
 }
