@@ -8,23 +8,30 @@ public class Grenade : MonoBehaviour
     [SerializeField] private GameObject _explosionPrefab;
     [SerializeField] private int _damage;
     private float _timer;
-   
+    private bool _isTimerOn;
 
+    private void Start()
+    {
+        _isTimerOn = false;
+    }
     
     private void Update()
     {
         CountTimer();
-        
     }
-
-  
-
     private void CountTimer()
     {
-        _timer += Time.deltaTime;
+        if (_isTimerOn) return;
         
-        if(_timer >= _explosionDelay )
+        StartCoroutine(GrenadeTimerRoutine());
+    }
+
+    public IEnumerator GrenadeTimerRoutine()
+    {
+        _isTimerOn = true;
+        yield return new WaitForSeconds(_explosionDelay);
         Explode();
+        _isTimerOn = false;
     }
 
     private void Explode()
@@ -41,9 +48,7 @@ public class Grenade : MonoBehaviour
     
     private void GiveDamage(Vector3 explosionPoint, float radius, int damage)
     {
-        
         Collider[] hitColliders = Physics.OverlapSphere(explosionPoint, radius);
-
         foreach (Collider hit in hitColliders)
         {
             if (hit.TryGetComponent<IDamageable>(out IDamageable damageable))

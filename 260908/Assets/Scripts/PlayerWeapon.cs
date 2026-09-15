@@ -5,6 +5,8 @@ using System;
 
 public class PlayerWeapon : MonoBehaviour
 {
+    private WaitForSeconds _nextAttackWait;
+    
     private Transform _cameraTransform;
     
     [SerializeField] private KeyCode _fireKey = KeyCode.Mouse0;
@@ -18,12 +20,12 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private FlameObject _flameEffect;
     
     
-    private float _currentCooldown;
+
     private int _currentAmmo;
     public event Action<int> OnAmmoChanged;
     public float AttackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
 
-    public int CurrrentAmmo
+    public int CurrentAmmo
     {
         get => _currentAmmo;
         private set
@@ -37,19 +39,15 @@ public class PlayerWeapon : MonoBehaviour
     
     private bool _isPressedFire => Input.GetKey(_fireKey);
     private bool _isPressdReload => Input.GetKeyDown(_reloadKey);
-    private bool _isReadyToAttack
-    {
-        get { return _currentCooldown >= AttackCooldown; }
-    }
+  
     private bool _isEnoughAmmo
     {
-       get { return _currentAmmo > 0; }
+       get { return CurrentAmmo > 0; }
     }
     private bool _isReloading;
+    private bool _isShooting;
 
-    private bool _canFire => _isPressedFire 
-                             && _isReadyToAttack && _isEnoughAmmo && !_isReloading;
-    
+    private bool _canFire => _isPressedFire && !_isShooting && _isEnoughAmmo && !_isReloading;
     
     //----------------------------------------------------------------------
 
@@ -62,41 +60,42 @@ public class PlayerWeapon : MonoBehaviour
     {
         SetDefault();
     }
-
-    private void Update()
-    {
-        UpdateCurrentCooldown();
-    }
-
     
     //----------------------------------------------------------------------
     private void CacheComponents()
     {
         _cameraTransform = Camera.main.transform;
-        
+        _nextAttackWait = new WaitForSeconds(AttackCooldown);
     }
 
     private void SetDefault()
     {
-        _currentCooldown = 0f;
-        CurrrentAmmo = _maxAmmo;
+        CurrentAmmo = _maxAmmo;
+        _isShooting = false;
     }
-    
-    
+   
     public void Fire()
     {
         if (!_canFire) return;
         
-        CurrrentAmmo--;
-        _currentCooldown = 0f;
+        StartCoroutine(WeaponFireRoutine());
+        
+        CurrentAmmo--;
         PlayFlameobject();
         
         if (!TryGetDamageable(out IDamageable damageable)) return;
         
         damageable.TakeDamage(_damage);
         Debug.Log($"PlayweWeapon: {damageable.GameObject.name}에게 발사");
-        
     }
+    
+    public IEnumerator WeaponFireRoutine()
+    {
+        _isShooting = true;
+        yield return _nextAttackWait;
+        _isShooting = false;
+    }
+
 
     private void PlayFlameobject()
     {
@@ -130,13 +129,7 @@ public class PlayerWeapon : MonoBehaviour
         return result;
 
     }
-
-    public void UpdateCurrentCooldown()
-    {
-        if (_isReadyToAttack) return;
-        _currentCooldown += Time.deltaTime;
-    }
-
+    
     public void Reload()
     {
         if(_isReloading) return;
@@ -155,9 +148,8 @@ public class PlayerWeapon : MonoBehaviour
             _isReloading = true;
             yield return new WaitForSeconds(_reloadDelay);
             Debug.Log("PlayerWeapon: 재장전 중");
-            CurrrentAmmo = _maxAmmo;
+            CurrentAmmo = _maxAmmo;
             _isReloading = false;
     }
-    
     
 }

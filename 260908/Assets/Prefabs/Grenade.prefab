@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccef71660a38094a813010cdb93847b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionDelay: 2
+  _explosionDelay: 3
   _explosionPrefab: {fileID: 8441217538452442355, guid: 99f60ff05286f6c40b5fc2b66f299fe9, type: 3}
   _damage: 40
 --- !u!1001 &412024807875507679
