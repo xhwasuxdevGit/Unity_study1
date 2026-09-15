@@ -8,7 +8,7 @@ public class GrenadeController : MonoBehaviour
    [SerializeField] private GameObject _grenadePrefab;
    [SerializeField] private Transform _grenadeSpwanPoint;
    
-   [SerializeField] private float _grenadeChargeTime;
+   [SerializeField] private float _keyChargeTime;
    [SerializeField] private int _maxGrenadeCount;
 
    public event Action<int> OnGrenadeCountChanged;
@@ -21,7 +21,6 @@ public class GrenadeController : MonoBehaviour
       {
          _grenadeCouter = value;
          OnGrenadeCountChanged?.Invoke(_grenadeCouter);
-         
       }
    }
 
@@ -29,14 +28,9 @@ public class GrenadeController : MonoBehaviour
    private float _throwForwardForce = 25.0f; 
    private float _keydownTimer;
    private int _grenadeCouter;
-   
+
    private bool _isPressedKey => Input.GetKey(KeyCode.Alpha3);
    private bool _isKeyup => Input.GetKeyUp(KeyCode.Alpha3);
-   private bool _enoughCharge
-   {
-      get { return _keydownTimer >= _grenadeChargeTime; }
-   }
-
    //----------------------------------------------
    private void Start()
    {
@@ -51,14 +45,19 @@ public class GrenadeController : MonoBehaviour
 
    private void ReadInput()
    {
+ 
+     StartCoroutine(InputkeyRoutine());
+   }
+
+   public IEnumerator InputkeyRoutine()
+   {
       if (_isPressedKey)
       {
-         _keydownTimer += Time.deltaTime;
-      }
-
-      if (_isKeyup && _enoughCharge)
-      {
-         ThrowGrenade();
+         yield return new WaitForSeconds(_keyChargeTime);
+         if (_isKeyup)
+         {
+            ThrowGrenade();
+         }
       }
    }
    

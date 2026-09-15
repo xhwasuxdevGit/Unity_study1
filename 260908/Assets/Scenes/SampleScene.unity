@@ -477,8 +477,12 @@ PrefabInstance:
       value: Gre
       objectReference: {fileID: 0}
     - target: {fileID: 8036923630579295114, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
-      propertyPath: _grenadeChargeTime
+      propertyPath: _keyChargeTime
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8036923630579295114, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
+      propertyPath: _grenadeChargeTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8984058284873480504, guid: b0b651a32a9b95143b4d56c38aa7ee1d, type: 3}
       propertyPath: m_LocalPosition.x
