@@ -20,21 +20,18 @@ public class PlayerController : MonoBehaviour, IInteractor
     
     public GameObject GameObject { get => gameObject; }
     public int CurrentHp { get; set; }
-
     
-   
-    
-
     //-------------------------------------------------------
     private void Awake()
     {
         CacheComponents();
-        CurrentHp = _maxHp;
+        
     }
 
     private void Start()
     {
         LockCursor();
+        CurrentHp = _maxHp;
     }
 
     private void FixedUpdate()

@@ -32,8 +32,12 @@ public class GrenadeController : MonoBehaviour
    
    private bool _isPressedKey => Input.GetKey(KeyCode.Alpha3);
    private bool _isKeyup => Input.GetKeyUp(KeyCode.Alpha3);
-   private bool _enoughCharge => _keydownTimer >= _grenadeChargeTime;
+   private bool _enoughCharge
+   {
+      get { return _keydownTimer >= _grenadeChargeTime; }
+   }
 
+   //----------------------------------------------
    private void Start()
    {
       GrenadeCounter = _maxGrenadeCount;
@@ -43,6 +47,7 @@ public class GrenadeController : MonoBehaviour
    {
       ReadInput();
    }
+   //-------------------------------------------------
 
    private void ReadInput()
    {
@@ -51,40 +56,26 @@ public class GrenadeController : MonoBehaviour
          _keydownTimer += Time.deltaTime;
       }
 
-      if (_isKeyup)
+      if (_isKeyup && _enoughCharge)
       {
-         if (_enoughCharge)
-         {
-            ThrowGrenade();
-         }
+         ThrowGrenade();
       }
    }
    
    public void ThrowGrenade()
    {
       GrenadeCounter--;
-
-      if (GrenadeCounter <= 0)
-      {
-         Debug.Log("GrenadeController: 남은 수류탄이 없습니다");
-         return;
-      }
+      if (GrenadeCounter <= 0) return;
       
-      
-      GameObject _grenadeInstance = Instantiate(
-         _grenadePrefab,
-         _grenadeSpwanPoint.position, 
-         _grenadeSpwanPoint.rotation
-      );
+      GameObject _grenadeInstance = Instantiate(_grenadePrefab,
+         _grenadeSpwanPoint.position, _grenadeSpwanPoint.rotation);
       
       Rigidbody _rigidbody = _grenadeInstance.GetComponent<Rigidbody>();
       
       if (_rigidbody == null) return;
      
-      Vector3 _throwDirection = 
-         (_grenadeInstance.transform.forward * _throwForwardForce) 
-         + (_grenadeInstance.transform.up * _throwupForce);
-     
+      Vector3 _throwDirection = (_grenadeInstance.transform.forward * _throwForwardForce) 
+                                + (_grenadeInstance.transform.up * _throwupForce);
       _rigidbody.AddForce(_throwDirection);
     
    }

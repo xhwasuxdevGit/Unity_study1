@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBox : MonoBehaviour, IInteractable
+public class InteractiveItem : MonoBehaviour, IInteractable
 {
+    public GameObject GameObject
+    {
+        get => gameObject;
+    }
 
-    public GameObject GameObject {get => gameObject; }
     private Outline _outline;
 
     private void Awake()
@@ -17,7 +20,12 @@ public class ItemBox : MonoBehaviour, IInteractable
     {
         Init();
     }
-    
+
+    private void CacheComponents()
+    {
+        _outline = GetComponent<Outline>();
+    }
+
     public void Targeting()
     {
         _outline.enabled = true;
@@ -27,7 +35,7 @@ public class ItemBox : MonoBehaviour, IInteractable
     {
         _outline.enabled = false;
     }
-    
+
     public void Interact(IInteractor owner)
     {
         Destroy(gameObject);
@@ -37,9 +45,5 @@ public class ItemBox : MonoBehaviour, IInteractable
     {
         _outline.enabled = false;
     }
-    
-    private void CacheComponents()
-    {
-        _outline = gameObject.GetComponent<Outline>();
-    }
 }
+  

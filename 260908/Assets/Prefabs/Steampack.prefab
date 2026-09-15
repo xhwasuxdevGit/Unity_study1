@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1551865753436721622}
   - component: {fileID: 2230465208995899892}
-  - component: {fileID: 1419672929125490512}
   - component: {fileID: 8855579289072850891}
+  - component: {fileID: 1064738338109754682}
   m_Layer: 0
   m_Name: Steampack
   m_TagString: Untagged
@@ -53,20 +53,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &1419672929125490512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2993424773604923301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce33a7ba5131b646b311d48b47c79df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timer: 0
-  _player: {fileID: 0}
 --- !u!65 &8855579289072850891
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -88,6 +74,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.05, y: 0.05, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1064738338109754682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2993424773604923301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d40fc4f3706c4479deb8a0ac2dac39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6277667749844331452
 PrefabInstance:
   m_ObjectHideFlags: 0
