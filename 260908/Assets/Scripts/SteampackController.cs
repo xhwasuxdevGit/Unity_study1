@@ -63,7 +63,6 @@ public class SteampackController : MonoBehaviour
         _playerMovement.MoveSpeed += 10f;
         _playerWeapon.AttackCooldown -= 0.2f;
         Debug.Log($"Steampack: 스팀팩 적용, 현재 체력: {_player.CurrentHp}");
-        _
     }
 
     private void DeactivateSteampac()
@@ -71,7 +70,7 @@ public class SteampackController : MonoBehaviour
         _playerMovement.MoveSpeed = _defaultSpeed;
         _playerWeapon.AttackCooldown = _defaultCooldown;
         Debug.Log("Steampack: 스팀팩 효과 끝!");
-        isBuffOn = false;
+        _isBuffOn = false;
     }
     
 }
