@@ -24,21 +24,23 @@ public class GrenadeController : MonoBehaviour
       }
    }
 
-   private float _throwupForce = 10;
-   private float _throwForwardForce = 20; 
+   private float _throwupForce = 7.5f;
+   private float _throwForwardForce = 15; 
    private float _keydownTimer;
    private int _grenadeCouter;
    private Coroutine _inputCoroutine;
 
-   private bool _isPressedKey => Input.GetKeyDown(KeyCode.Alpha3);
+   private bool _isKeyDown => Input.GetKeyDown(KeyCode.Alpha3);
    private bool _isKeyUp => Input.GetKeyUp(KeyCode.Alpha3);
+   private bool _iskeyCharging => Input.GetKey(KeyCode.Alpha3);
    private bool _isGrenadeEnough => GrenadeCounter > 0;
-   private bool _isInputReady;
+   private bool _isInputWorking;
    
    //----------------------------------------------
    private void Start()
    {
       GrenadeCounter = _maxGrenadeCount;
+      _isInputWorking = false;
    }
 
    private void Update()
@@ -49,23 +51,31 @@ public class GrenadeController : MonoBehaviour
 
    private void ReadInput()
    {
-      if (_isPressedKey && !_isInputReady && _isGrenadeEnough)
+      if (_isInputWorking) return;
+
+      if (_isKeyDown && _isGrenadeEnough)
       {
-         StartCoroutine(KeyChargeRoutine());
+         _inputCoroutine = StartCoroutine(KeyChargeRoutine());
+      }
+
+      if (_isKeyUp)
+      {
+         ThrowGrenade();
+         StopCoroutine(_inputCoroutine);
+         _inputCoroutine = null;
+         _isInputWorking = false;
       }
       
    }
 
    public IEnumerator KeyChargeRoutine()
    {
-      _isInputReady = true;
-      yield return new WaitForSeconds(_keyChargeTime);
-      if (_isKeyUp)
+      _isInputWorking = true;
+      while (_iskeyCharging)
       {
-         ThrowGrenade();
+         yield return new WaitForSeconds(_keyChargeTime);
       }
-      
-      _isInputReady = false;
+      _isInputWorking = false;
    }
    
    public void ThrowGrenade()

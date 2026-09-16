@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerUIBinder : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerUIBinder : MonoBehaviour
    [SerializeField] private PlayerWeapon _playerWeapon;
    [SerializeField] private PlayerUIController _playerUIController;
    [SerializeField] private GrenadeController _grenade;
+   [SerializeField] private PlayerController _player;
    
    private void OnEnable()
    {
@@ -24,11 +26,13 @@ public class PlayerUIBinder : MonoBehaviour
    {
       _playerWeapon.OnAmmoChanged += _playerUIController.RefreshMagazineUI;
       _grenade.OnGrenadeCountChanged += _playerUIController.UpdateGrenadeUI;
+      _player.OnPlayerHPChanged += _playerUIController.UPdateHPUI;
    }
 
    private void UnBindPlayerUIChangeEvents()
    {
       _playerWeapon.OnAmmoChanged -= _playerUIController.RefreshMagazineUI;
       _grenade.OnGrenadeCountChanged -= _playerUIController.UpdateGrenadeUI;
+      _player.OnPlayerHPChanged += _playerUIController.UPdateHPUI;
    }
 }

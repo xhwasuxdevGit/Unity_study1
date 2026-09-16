@@ -5,7 +5,7 @@ public class FindNull : MonoBehaviour
     void Start()
     {
         // 찾고자 하는 원하는 클래스(스크립트) 명을 <>안에 넣어주세요.
-        FindObjects<PlayerUIBinder>();
+        FindObjects<UIBinderStudy>();
     }
 
     // 제네릭 메서드를 통해 T 타입의 오브젝트를 찾아 로그에 출력합니다.

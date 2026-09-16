@@ -14,12 +14,25 @@ public class PlayerController : MonoBehaviour, IInteractor
     private PlayerWeapon _weapon;
     private Transform _cameraTransform;
     private IInteractable _targetInteractable;
+    private int _currentHp;
+    
     private bool _hasDetectInteractable => _targetInteractable != null;
     private bool _isPressedInteractKey => Input.GetKeyDown(_interactionKey);
     private bool _canInteraction => _hasDetectInteractable && _isPressedInteractKey;
     
     public GameObject GameObject { get => gameObject; }
-    public int CurrentHp { get; set; }
+    public event Action<int> OnPlayerHPChanged;
+
+    public int CurrentHp
+    {
+        get => _currentHp;
+
+        set
+        {
+            _currentHp = value;
+            OnPlayerHPChanged?.Invoke(_currentHp);
+        }
+    }
     
     //-------------------------------------------------------
     private void Awake()

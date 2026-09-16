@@ -32,7 +32,6 @@ public class PlayerWeapon : MonoBehaviour
         {
             _currentAmmo = value;
             OnAmmoChanged?.Invoke(_currentAmmo);
-          
         }
     }
     public int MaxAmmo => _maxAmmo;
@@ -47,7 +46,8 @@ public class PlayerWeapon : MonoBehaviour
     private bool _isReloading;
     private bool _isShooting;
 
-    private bool _canFire => _isPressedFire && !_isShooting && _isEnoughAmmo && !_isReloading;
+    private bool _canFire => _isPressedFire && !_isShooting && 
+                             _isEnoughAmmo && !_isReloading;
     
     //----------------------------------------------------------------------
 
@@ -71,7 +71,6 @@ public class PlayerWeapon : MonoBehaviour
     private void SetDefault()
     {
         CurrentAmmo = _maxAmmo;
-        _isShooting = false;
     }
    
     public void Fire()

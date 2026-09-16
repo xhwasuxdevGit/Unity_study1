@@ -390,6 +390,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 407853063}
   m_SourcePrefab: {fileID: 100100000, guid: fc5a676d2c90b3d4f8a22e369c35950d, type: 3}
+--- !u!114 &981173768 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1822275744338902876, guid: b75b317e4a8373d498b9b95b158cb70e, type: 3}
+  m_PrefabInstance: {fileID: 2219479449003377521}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adcc28abdc93bb47aab4f85b5ec73cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1324961994
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -653,6 +664,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cd25eb13d304a4d9c6fbf35ada2a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1759926311 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3096479356253120515, guid: b75b317e4a8373d498b9b95b158cb70e, type: 3}
+  m_PrefabInstance: {fileID: 2219479449003377521}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &563321427304607349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -718,6 +740,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 752751671052583540, guid: b75b317e4a8373d498b9b95b158cb70e, type: 3}
+      propertyPath: _keyChargeTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1355137215849037252, guid: b75b317e4a8373d498b9b95b158cb70e, type: 3}
       propertyPath: m_Name
       value: Player
@@ -762,6 +788,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5786248519532855357, guid: b75b317e4a8373d498b9b95b158cb70e, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 981173768}
     - target: {fileID: 6934218704471785391, guid: b75b317e4a8373d498b9b95b158cb70e, type: 3}
       propertyPath: _duration
       value: 10
@@ -770,6 +800,14 @@ PrefabInstance:
       propertyPath: _steampack
       value: 
       objectReference: {fileID: 1506362402}
+    - target: {fileID: 8549644697881950873, guid: b75b317e4a8373d498b9b95b158cb70e, type: 3}
+      propertyPath: _hpUI
+      value: 
+      objectReference: {fileID: 1759926311}
+    - target: {fileID: 8549644697881950873, guid: b75b317e4a8373d498b9b95b158cb70e, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 981173768}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
