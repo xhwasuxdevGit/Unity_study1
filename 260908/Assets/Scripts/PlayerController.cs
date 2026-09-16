@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IInteractor
+public class PlayerController : MonoBehaviour, IInteractor, IDamageable
 {
     [SerializeField] private Transform _cameraPivot;
     [SerializeField] private float _detectionRange;
@@ -139,6 +139,12 @@ public class PlayerController : MonoBehaviour, IInteractor
         
         _targetInteractable.Interact(this);
         _targetInteractable = null;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        CurrentHp -= damage;
+        Debug.Log($"{gameObject}가 데미지 입음  [HP:  {CurrentHp}/{_maxHp}]");
     }
 
 }

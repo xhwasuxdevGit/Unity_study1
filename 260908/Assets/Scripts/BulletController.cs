@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour, IPoolable
@@ -7,21 +9,26 @@ public class BulletController : MonoBehaviour, IPoolable
     private int _damage;
     private float _speed;
     private const string LAYER_PLAYER = "Player";
-    
     private float _returnToDelay;
     private float _elapsedTime;
+    
+    private IDamageable _damageable;
 
     public ObjectPool Pool { get; set; }
     public Transform tr { get => transform; }
-   
+
+    private void Start()
+    {
+        _damageable = null;
+    }
 
     // 벽인 경우 -> 파괴
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(LAYER_PLAYER))
         {
-            // ToDo 데미지 입히기 구현
-            Debug.Log("플레이어 데미지 입음");
+            _damageable = other.gameObject.GetComponent<IDamageable>();
+            _damageable?.TakeDamage(_damage);
         }
         
         Pool.Return(this);
@@ -63,12 +70,5 @@ public class BulletController : MonoBehaviour, IPoolable
     {
         _elapsedTime += Time.deltaTime;
     }
-
-    
-    
-    
-
-   
-      
       
 }

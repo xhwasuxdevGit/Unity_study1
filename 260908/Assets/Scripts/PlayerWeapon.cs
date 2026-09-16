@@ -76,9 +76,7 @@ public class PlayerWeapon : MonoBehaviour
     public void Fire()
     {
         if (!_canFire) return;
-        
         StartCoroutine(WeaponFireRoutine());
-        
         CurrentAmmo--;
         PlayFlameobject();
         
@@ -86,6 +84,8 @@ public class PlayerWeapon : MonoBehaviour
         
         damageable.TakeDamage(_damage);
         Debug.Log($"PlayweWeapon: {damageable.GameObject.name}에게 발사");
+        
+        
     }
     
     public IEnumerator WeaponFireRoutine()

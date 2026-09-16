@@ -11,10 +11,12 @@ public class TurretSensor : MonoBehaviour
     private const string LAYER_PLAYER = "Player";
     private Transform _playerTransform;
     private SphereCollider _sphereCollider;
+    private WaitForSeconds _nextRayshotWait;
 
     private bool _isPlayerInTrigger => _playerTransform != null;
     private bool _isPlayerInsight;
     private bool _isAwarePlayer => _isPlayerInsight && _isPlayerInTrigger;
+    private bool _canRayshot;
 
     public Transform PlayerTransform => _playerTransform;
     public bool IsAwarePlayer => _isAwarePlayer;
@@ -44,6 +46,11 @@ public class TurretSensor : MonoBehaviour
         CacheComponent();
     }
 
+    private void Start()
+    {
+        _nextRayshotWait = new WaitForSeconds(0.1f);
+    }
+
     private void Update()
     {
         RayShotToPlayer();
@@ -56,7 +63,6 @@ public class TurretSensor : MonoBehaviour
     
     private void RayShotToPlayer()
     {
-
         _isPlayerInsight = false;
         if(!_isPlayerInTrigger) return;
         
@@ -70,11 +76,21 @@ public class TurretSensor : MonoBehaviour
         
         Ray ray = new Ray(from, (to - from).normalized);
         RaycastHit hit;
-
+        
         if (Physics.Raycast(ray, out hit, _sphereCollider.radius, _targetLayer))
         {
             _isPlayerInsight = true;
+            if (!_canRayshot)return;
+            StartCoroutine(RayshotRoutine());
         }
-        
+
+     
+    }
+
+    public IEnumerator RayshotRoutine()
+    {
+        _canRayshot = true;
+        yield return _nextRayshotWait;
+        _canRayshot = false;
     }
 }
