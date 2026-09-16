@@ -32,7 +32,6 @@ public abstract class SingletonBehavior<T> : MonoBehaviour where T : MonoBehavio
          _instance = GetComponent<T>();
          DontDestroyOnLoad(gameObject);
       }
-
-
+      
    }
 }

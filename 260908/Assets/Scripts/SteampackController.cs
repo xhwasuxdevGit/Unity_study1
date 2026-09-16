@@ -14,6 +14,7 @@ public class SteampackController : MonoBehaviour
     private float _defaultSpeed;
     private float _defaultCooldown;
     private bool _isBuffOn;
+    private bool _nullStopper;
     private Coroutine _steampackRoutine;
     private void Awake()
     {
@@ -46,15 +47,13 @@ public class SteampackController : MonoBehaviour
 
     private void UseSteampack()
     {
-        if(_isBuffOn) return;
+        if(_nullStopper || _isBuffOn) return;
 
         if (_steampack == null)
         {
-            Debug.Log("스팀팩 오브젝트 사라지고 버프시작");
             _steampackRoutine = StartCoroutine(SteampackRoutine());
-            StopCoroutine(_steampackRoutine);
+            _nullStopper = true;
         }
-        
     }
     
     public IEnumerator SteampackRoutine()
@@ -63,7 +62,6 @@ public class SteampackController : MonoBehaviour
         ActivateSteampac();
         yield return new WaitForSeconds(_duration);
         DeactivateSteampac();
-        _isBuffOn = false;
     } 
    
     private void ActivateSteampac()
@@ -72,12 +70,11 @@ public class SteampackController : MonoBehaviour
         _playerMovement.MoveSpeed += 10f;
         _playerWeapon.AttackCooldown -= 0.2f;
         Debug.Log($"Steampack: 스팀팩 적용, 현재 체력: {_player.CurrentHp}");
-        
+        _isBuffOn = false;
     }
 
     private void DeactivateSteampac()
     {
-       
         _playerMovement.MoveSpeed = _defaultSpeed;
         _playerWeapon.AttackCooldown = _defaultCooldown;
         Debug.Log("Steampack: 스팀팩 효과 끝!");

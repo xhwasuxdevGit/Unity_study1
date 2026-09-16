@@ -7,10 +7,15 @@ public class GameManager : SingletonBehavior<GameManager>
     public bool IsGameRunning {get; private set; }
    
     private void Awake() => SetSingleton();
-    private void Start() => Run();
+    private void Start()
+    {
+        Run();
+    }
+    
+    
     public void Run()
     {
-        LockCursor();
+        //LockCursor();
         Time.timeScale = 1;
         IsGameRunning = true;
     }
@@ -33,4 +38,5 @@ public class GameManager : SingletonBehavior<GameManager>
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
+    
 }
