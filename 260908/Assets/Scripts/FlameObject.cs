@@ -21,6 +21,11 @@ public class FlameObject : MonoBehaviour
         gameObject.SetActive(_playInstant);
     }
 
+    private void OnEnable()
+    {
+        SetElapseDefault();
+    }
+
     private void Update()
     {
         Updateelapsed();
@@ -41,6 +46,7 @@ public class FlameObject : MonoBehaviour
     {
       SetElapseDefault();
       // 딜레이 초기화 > 계속해서 이펙트 재생됨
+      gameObject.SetActive(true);
     }
 
     private void UnPlay()

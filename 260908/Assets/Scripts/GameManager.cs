@@ -15,7 +15,7 @@ public class GameManager : SingletonBehavior<GameManager>
     
     public void Run()
     {
-        //LockCursor();
+        LockCursor();
         Time.timeScale = 1;
         IsGameRunning = true;
     }

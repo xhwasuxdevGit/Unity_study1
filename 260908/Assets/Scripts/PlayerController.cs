@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour, IInteractor, IDamageable
 
     private void Start()
     {
-        LockCursor();
         CurrentHp = _maxHp;
     }
 
@@ -79,13 +78,6 @@ public class PlayerController : MonoBehaviour, IInteractor, IDamageable
         _weapon = GetComponentInChildren<PlayerWeapon>();
         _cameraTransform = Camera.main.transform;
         CurrentHp = _maxHp;
-
-    }
-
-    private void LockCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = true;
     }
 
     private void SetWeaponTransform()

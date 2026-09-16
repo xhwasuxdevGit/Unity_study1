@@ -6,7 +6,6 @@ using System;
 public class PlayerWeapon : MonoBehaviour
 {
     private WaitForSeconds _nextAttackWait;
-    
     private Transform _cameraTransform;
     
     [SerializeField] private KeyCode _fireKey = KeyCode.Mouse0;
@@ -64,7 +63,6 @@ public class PlayerWeapon : MonoBehaviour
     private void CacheComponents()
     {
         _cameraTransform = Camera.main.transform;
-        _nextAttackWait = new WaitForSeconds(AttackCooldown);
     }
 
     private void SetDefault()
@@ -75,37 +73,42 @@ public class PlayerWeapon : MonoBehaviour
     public void Fire()
     {
         if (!_canFire) return;
-        StartCoroutine(WeaponFireRoutine());
-        
         CurrentAmmo--;
         PlayFlameobject();
-        if (!TryGetDamageable(out IDamageable damageable)) return;
+
+        if (TryGetDamageable(out IDamageable damageable))
+        {
+            damageable.TakeDamage(_damage);
+            Debug.Log($"PlayweWeapon: {damageable.GameObject.name}에게 발사");
+        }
         
-        damageable.TakeDamage(_damage);
-        Debug.Log($"PlayweWeapon: {damageable.GameObject.name}에게 발사");
-        
+        StartCoroutine(WeaponFireRoutine());
     }
     
     public IEnumerator WeaponFireRoutine()
     {
         _isShooting = true;
-        yield return _nextAttackWait;
+        yield return new WaitForSeconds(AttackCooldown);
         _isShooting = false;
     }
 
 
     private void PlayFlameobject()
     {
-        _flameEffect.gameObject.SetActive(true);
+        if (_flameEffect == null) return;
         _flameEffect.Play();
     }
 
     private void PlaybulletImpactEffect(RaycastHit hit)
     {
-        Transform effectTransform = Instantiate(_bulletImpactPrefab).transform;
-        effectTransform.position = hit.point;
-        effectTransform.forward = hit.normal;
-        effectTransform.gameObject.SetActive(true);
+        if (_bulletImpactPrefab == null) return;
+        
+        FlameObject _bulletImpact = Instantiate(_bulletImpactPrefab,
+            hit.point, Quaternion.LookRotation(hit.normal));
+        
+        _bulletImpact.transform.SetParent(hit.transform);
+        _bulletImpact.gameObject.SetActive(true);
+        _bulletImpact.Play();
     }
 
     private bool TryGetDamageable(out IDamageable damageable)

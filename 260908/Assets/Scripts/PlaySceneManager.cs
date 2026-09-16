@@ -18,11 +18,6 @@ public class PlaySceneManager : MonoBehaviour
         GameManager.Instance.Run();
     }
 
-    private void OnDisable()
-    {
-        GameManager.Instance.Pause();
-    }
-
     private void Update()
     {
         InputPauseKey();
