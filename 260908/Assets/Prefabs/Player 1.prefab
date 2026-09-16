@@ -223,8 +223,8 @@ MonoBehaviour:
   _magazine: {fileID: 2620532099851287222}
   _weapon: {fileID: 5369695868785808316}
   _grenadeUI: {fileID: 8147712760024494498}
-  _hpUI: {fileID: 0}
-  _player: {fileID: 0}
+  _hpUI: {fileID: 3096479356253120515}
+  _player: {fileID: 1822275744338902876}
 --- !u!114 &752751671052583540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grenadePrefab: {fileID: 1070458637840847399, guid: c6c79ecae34042f458773ff7989676e1, type: 3}
   _grenadeSpwanPoint: {fileID: 4643161995271340067}
-  _keyChargeTime: 2
+  _keyChargeTime: 1
   _maxGrenadeCount: 3
 --- !u!114 &5786248519532855357
 MonoBehaviour:
@@ -256,7 +256,7 @@ MonoBehaviour:
   _playerWeapon: {fileID: 5369695868785808316}
   _playerUIController: {fileID: 8549644697881950873}
   _grenade: {fileID: 752751671052583540}
-  _player: {fileID: 0}
+  _player: {fileID: 1822275744338902876}
 --- !u!1 &1972763479750967424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,8 +1169,9 @@ MonoBehaviour:
   _attackCooldown: 0.4
   _maxAmmo: 30
   _reloadDelay: 1.5
-  SteampackDuration: 0
+  SteampackDuration: 10
   _flameEffect: {fileID: 6231083505340158589}
+  _bulletImpactPrefab: {fileID: 0}
 --- !u!1 &7868106922930262461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1822275744338902876}
   _steampack: {fileID: 0}
-  _duration: 3
+  _duration: 2
 --- !u!1 &7984609013786661880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,6 +1498,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 8eaaa4f553116f44b8459bc24201c514, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800004, guid: 8eaaa4f553116f44b8459bc24201c514, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800004, guid: 8eaaa4f553116f44b8459bc24201c514, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 19900000, guid: 8eaaa4f553116f44b8459bc24201c514, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1510,7 +1523,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 100002, guid: 8eaaa4f553116f44b8459bc24201c514, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 8eaaa4f553116f44b8459bc24201c514, type: 3}

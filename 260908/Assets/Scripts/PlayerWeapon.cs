@@ -18,9 +18,8 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private float _reloadDelay;
     [SerializeField] private int SteampackDuration;
     [SerializeField] private FlameObject _flameEffect;
+    [SerializeField] private FlameObject _bulletImpactPrefab;
     
-    
-
     private int _currentAmmo;
     public event Action<int> OnAmmoChanged;
     public float AttackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
@@ -77,14 +76,13 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (!_canFire) return;
         StartCoroutine(WeaponFireRoutine());
+        
         CurrentAmmo--;
         PlayFlameobject();
-        
         if (!TryGetDamageable(out IDamageable damageable)) return;
         
         damageable.TakeDamage(_damage);
         Debug.Log($"PlayweWeapon: {damageable.GameObject.name}에게 발사");
-        
         
     }
     
@@ -104,11 +102,10 @@ public class PlayerWeapon : MonoBehaviour
 
     private void PlaybulletImpactEffect(RaycastHit hit)
     {
-        Transform effectTransform = Instantiate(_flameEffect).transform;
+        Transform effectTransform = Instantiate(_bulletImpactPrefab).transform;
         effectTransform.position = hit.point;
         effectTransform.forward = hit.normal;
         effectTransform.gameObject.SetActive(true);
-
     }
 
     private bool TryGetDamageable(out IDamageable damageable)
