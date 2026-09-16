@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class SingletonBehavior<T> : MonoBehaviour where T : MonoBehaviour
 {
-   
    private static T _instance;
    
    public static T Instance
@@ -14,7 +13,12 @@ public abstract class SingletonBehavior<T> : MonoBehaviour where T : MonoBehavio
          if (_instance == null)
          {
             _instance = FindAnyObjectByType<T>();
-            DontDestroyOnLoad(_instance.gameObject);
+            
+            if (_instance != null)
+            {
+               DontDestroyOnLoad(_instance.gameObject);
+            }
+           
          }
          return _instance;
       }
