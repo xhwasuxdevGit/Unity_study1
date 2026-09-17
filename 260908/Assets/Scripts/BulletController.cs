@@ -27,10 +27,10 @@ public class BulletController : MonoBehaviour, IPoolable
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(LAYER_PLAYER))
         {
+            SetDefaultElaps();
             _damageable = other.gameObject.GetComponent<IDamageable>();
             _damageable?.TakeDamage(_damage);
         }
-        
         Pool.Return(this);
     }
     
@@ -69,6 +69,11 @@ public class BulletController : MonoBehaviour, IPoolable
     private void UpdateElapsedTime()
     {
         _elapsedTime += Time.deltaTime;
+    }
+
+    private void SetDefaultElaps()
+    {
+        _elapsedTime = 0;
     }
       
 }
