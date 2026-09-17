@@ -7,12 +7,11 @@ using UnityEngine.SceneManagement;
 public class PlaySceneManager : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseMenuUI;
-    [SerializeField] private GameObject _gameOverUI;
+    
 
     private void Start()
     {
-        _pauseMenuUI.SetActive(false);
-        _gameOverUI.SetActive(false);
+        _pauseMenuUI.SetActive(false); 
     }
 
     private void OnEnable()
@@ -27,7 +26,7 @@ public class PlaySceneManager : MonoBehaviour
  
     private void InputPauseKey()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             GameManager.Instance.Pause();
             _pauseMenuUI.SetActive(true);
