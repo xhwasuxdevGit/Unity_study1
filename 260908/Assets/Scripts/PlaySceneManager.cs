@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class PlaySceneManager : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseMenuUI;
+    [SerializeField] private GameObject _gameOverUI;
 
     private void Start()
     {
         _pauseMenuUI.SetActive(false);
+        _gameOverUI.SetActive(false);
     }
 
     private void OnEnable()
