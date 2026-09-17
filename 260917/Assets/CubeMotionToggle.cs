@@ -5,6 +5,7 @@ using UnityEngine;
 public class CubeMotionToggle : MonoBehaviour
 {
    private const string PARAM_IS_SPINNING = "IsSpinning";
+   private const string STATE_CUBE_SPIN = "Base Layer.CubeSpin";
 
    private Animator _animator;
    private bool _isSpinning;
@@ -30,6 +31,17 @@ public class CubeMotionToggle : MonoBehaviour
       {
          ToggleMotion();
       }
+
+      if (Input.GetKeyDown(KeyCode.R))
+      {
+         PlaySpin();
+      }
+   }
+
+   private void PlaySpin()
+   {
+      _animator.Play(STATE_CUBE_SPIN);
+      Debug.Log("CubeMotionToggle: 회전 상태를 곧바로 재생합니다");
    }
 
    private void ToggleMotion()
