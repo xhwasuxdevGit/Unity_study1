@@ -37,11 +37,12 @@ public class BulletPool : MonoBehaviour
 
     // [BUG-10] 원인 : 총알이 비활성활됨에도 불구하고, 총알의 물리연산은 계속 유지되고 있음
     //                따라서 풀에서 다시 꺼내져 활성화되면, 물리연산값을 유지한채로 소환됨
-    //          수정 : 총알이 오브젝트풀로 다시 들어갈때      
+    //          수정 : 총알이 오브젝트풀로 다시 들어갈때, 적용되고 있는 물리연산값을 초기화 시켜줌      
     public void Return(GameObject bullet)
     {
         _body =  bullet.GetComponent<Rigidbody>();
         _body.velocity = Vector3.zero;
+        _body.angularVelocity = Vector3.zero; // 회전 운동도 같이 초기화 시켜줘야 함
         bullet.SetActive(false);
     }
 
