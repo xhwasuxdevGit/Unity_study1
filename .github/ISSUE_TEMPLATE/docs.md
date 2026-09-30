@@ -2,7 +2,7 @@
 name: Docs
 about: 문서 관련 작업을 위한 템플릿
 title: '[DOCS] '
-labels: documentation
+labels: 'documentation'
 assignees: ''
 ---
 

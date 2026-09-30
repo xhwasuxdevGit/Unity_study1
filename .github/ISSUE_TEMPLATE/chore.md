@@ -1,8 +1,8 @@
 ---
 name: Chore
-about: '기타 작업을 위한 템플릿'
+about: 기타 작업을 위한 템플릿
 title: '[CHORE] '
-labels: chore
+labels: 'chore'
 assignees: ''
 ---
 

@@ -1,8 +1,8 @@
 ---
 name: Bug Report
-about: '오류나 문제점 발생 시 사용'
+about: 오류나 문제점이 발생하면 사용하는 템플릿
 title: '[BUG] '
-labels: bug
+labels: 'bug'
 assignees: ''
 ---
 

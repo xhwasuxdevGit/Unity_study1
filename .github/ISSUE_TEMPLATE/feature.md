@@ -1,8 +1,8 @@
 ---
 name: Feature
-about: '새로운 기능을 구현하거나 추가할 때 사용하는 템플릿'
+about: 새로운 기능을 구현하거나 추가할 때 사용하는 템플릿
 title: '[FEAT] '
-labels: enhancement
+labels: 'enhancement'
 assignees: ''
 ---
 
