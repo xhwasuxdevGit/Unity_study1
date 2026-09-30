@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: ''
+about: '오류나 문제점 발생 시 사용'
 title: '[BUG] '
 labels: bug
 assignees: ''
